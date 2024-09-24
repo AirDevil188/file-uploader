@@ -25,3 +25,9 @@ model User {
   username String @unique
   password String
 }
+
+model FIle {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+}
