@@ -21,10 +21,11 @@ model session {
 }
 
 model user {
-  id       String @id @default(uuid())
-  username String @unique
+  id       String   @id @default(uuid())
+  username String   @unique
   password String
   files    file[]
+  folders  folder[]
 }
 
 model file {
@@ -33,4 +34,16 @@ model file {
   createdAt DateTime @default(now())
   user      user     @relation(fields: [fileId], references: [id])
   fileId    String
+  folder    folder?  @relation(fields: [folderId], references: [id])
+  folderId  String
+}
+
+model folder {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  files     file[]
+  user      user     @relation(fields: [userId], references: [id])
+  userId    String
 }
