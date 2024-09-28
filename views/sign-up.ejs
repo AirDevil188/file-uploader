@@ -6,7 +6,7 @@
     <header></header>
     <main>
       <section class="sign-up-section">
-        <form action="/" method="POST">
+        <form action="/sign-up" method="POST">
           <div class="form-group">
             <label for="username">Username: </label>
             <input type="text" name="username" id="username" />
@@ -28,7 +28,7 @@
           </div>
         </form>
       </section>
-      <% include('errors') %>
+      <%- include('errors') %>
     </main>
     <footer></footer>
   </body>
