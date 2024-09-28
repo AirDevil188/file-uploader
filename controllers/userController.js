@@ -14,7 +14,7 @@ const validateUser = [
   body("password").isLength({ min: 8 }).withMessage(`Password ${passwordErr}`),
   body("confirm_password")
     .custom((value, { req }) => {
-      return value === req.body.confirm_password;
+      return value === req.body.password;
     })
     .withMessage("Passwords don't match."),
 ];
