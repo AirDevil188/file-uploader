@@ -7,4 +7,6 @@ userRouter.get("/", userController.getLogIn);
 
 userRouter.get("/sign-up", userController.getSignUp);
 
+userRouter.post("/sign-up", userController.postSignUp);
+
 module.exports = userRouter;
