@@ -20,7 +20,7 @@ model session {
   expiresAt DateTime
 }
 
-model user {
+model users {
   id       String   @id @default(uuid())
   username String   @unique
   password String
@@ -33,7 +33,7 @@ model file {
   name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      user     @relation(fields: [userId], references: [id])
+  user      users    @relation(fields: [userId], references: [id])
   userId    String
   folder    folder?  @relation(fields: [folderId], references: [id])
   folderId  String
@@ -45,6 +45,6 @@ model folder {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   files     file[]
-  user      user     @relation(fields: [userId], references: [id])
+  user      users    @relation(fields: [userId], references: [id])
   userId    String
 }
