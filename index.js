@@ -6,6 +6,8 @@ const passport = require("passport");
 const { PrismaClient } = require("@prisma/client");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 
+const userRouter = require("./routes/userRouter");
+
 dotenv.config();
 
 const port = process.env.PORT;
@@ -13,6 +15,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
 app.use(
@@ -20,7 +23,7 @@ app.use(
     cookie: {
       maxAge: 24 * 60 * 60 * 1000, // one day
     },
-    secret: "a santa at nasa",
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true,
     store: new PrismaSessionStore(new PrismaClient(), {
@@ -30,6 +33,15 @@ app.use(
     }),
   })
 );
+
+require("./middlewares/passport");
+app.use(passport.session());
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
+app.use("/", userRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);
