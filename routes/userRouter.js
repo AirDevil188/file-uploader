@@ -2,9 +2,10 @@ const { Router } = require("express");
 const passport = require("passport");
 
 const userController = require("../controllers/userController");
+const indexController = require("../controllers/indexController");
 const userRouter = Router();
 
-userRouter.get("/", userController.getLogIn);
+userRouter.get("/", indexController.getIndex);
 
 userRouter.post(
   "/",
