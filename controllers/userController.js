@@ -20,9 +20,17 @@ const validateUser = [
 ];
 
 const getLogIn = asyncHandler(async (req, res, next) => {
-  res.render("log-in", {
-    title: "Index",
-  });
+  if (req.user) {
+    return res.render("index", {
+      title: "CloudUp - Homepage",
+      user: req.user,
+    });
+  } else {
+    return res.render("log-in", {
+      title: "CloudUp - Log In",
+      user: req.user,
+    });
+  }
 });
 
 const getSignUp = asyncHandler(async (req, res, next) => {
