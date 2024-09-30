@@ -19,20 +19,6 @@ const validateUser = [
     .withMessage("Passwords don't match."),
 ];
 
-const getLogIn = asyncHandler(async (req, res, next) => {
-  if (req.user) {
-    return res.render("index", {
-      title: "CloudUp - Homepage",
-      user: req.user,
-    });
-  } else {
-    return res.render("log-in", {
-      title: "CloudUp - Log In",
-      user: req.user,
-    });
-  }
-});
-
 const getSignUp = asyncHandler(async (req, res, next) => {
   res.render("sign-up", {
     title: "Sign Up",
@@ -45,7 +31,6 @@ const postSignUp = [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      console.log(errors);
       return res.status(400).render("sign-up", {
         title: "Sign Up",
         errors: errors.array(),
@@ -64,7 +49,6 @@ const postSignUp = [
 ];
 
 module.exports = {
-  getLogIn,
   getSignUp,
   postSignUp,
 };
