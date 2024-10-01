@@ -6,7 +6,7 @@ const db = require("../db/queries");
 const userNameErr = "must contain at least 1 character.";
 const passwordErr = "must contain at least 8 characters.";
 
-const validateUser = [
+const validateNewUser = [
   body("username")
     .trim()
     .isLength({ min: 1 })
@@ -19,6 +19,30 @@ const validateUser = [
     .withMessage("Passwords don't match."),
 ];
 
+const getLogIn = asyncHandler(async (req, res, next) => {
+  console.log(res.locals.currentUser);
+  if (res.locals.currentUser) {
+    res.redirect("/");
+  } else {
+    res.render("log-in", {
+      title: "CloudUp - Log In",
+    });
+  }
+});
+
+const postLogIn = [
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render("log-in", {
+        title: "CloudUp - Log In",
+        errors: errors.array(),
+      });
+    }
+  }),
+];
+
 const getSignUp = asyncHandler(async (req, res, next) => {
   res.render("sign-up", {
     title: "Sign Up",
@@ -26,7 +50,7 @@ const getSignUp = asyncHandler(async (req, res, next) => {
 });
 
 const postSignUp = [
-  validateUser,
+  validateNewUser,
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
@@ -50,5 +74,7 @@ const postSignUp = [
 
 module.exports = {
   getSignUp,
+  getLogIn,
+  postLogIn,
   postSignUp,
 };
