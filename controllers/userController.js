@@ -20,7 +20,6 @@ const validateNewUser = [
 ];
 
 const getLogIn = asyncHandler(async (req, res, next) => {
-  console.log(res.locals.currentUser);
   if (res.locals.currentUser) {
     res.redirect("/");
   } else {
@@ -44,9 +43,13 @@ const postLogIn = [
 ];
 
 const getSignUp = asyncHandler(async (req, res, next) => {
-  res.render("sign-up", {
-    title: "Sign Up",
-  });
+  if (res.locals.currentUser) {
+    res.redirect("/");
+  } else {
+    res.render("sign-up", {
+      title: "Sign Up",
+    });
+  }
 });
 
 const postSignUp = [
