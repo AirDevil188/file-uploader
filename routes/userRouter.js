@@ -2,13 +2,12 @@ const { Router } = require("express");
 const passport = require("passport");
 
 const userController = require("../controllers/userController");
-const indexController = require("../controllers/indexController");
 const userRouter = Router();
 
-userRouter.get("/", indexController.getIndex);
+userRouter.get("/log-in", userController.getLogIn);
 
 userRouter.post(
-  "/",
+  "/log-in",
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/",
