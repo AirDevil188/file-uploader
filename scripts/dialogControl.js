@@ -7,6 +7,7 @@ const overlay = document.querySelector(".overlay");
 newFolderBtn.addEventListener("click", () => {
   dialog.showModal();
 });
+
 if (dialogSection.contains(dialog)) {
   document.querySelector("dialog").addEventListener("click", (e) => {
     if (e.target.tagName === "DIALOG") {
