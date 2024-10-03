@@ -8,14 +8,14 @@ const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 
 const indexRouter = require("./routes/indexRouter");
 const userRouter = require("./routes/userRouter");
+const folderRouter = require("./routes/folderRouter");
 
 dotenv.config();
 
 const port = process.env.PORT;
 const app = express();
 
-app.use(express.static(path.join(__dirname, "public")));
-app.set("views", path.join(__dirname, "views"));
+app.use(express.static("./"));
 app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
@@ -44,6 +44,7 @@ app.use((req, res, next) => {
 
 app.use("/", indexRouter);
 app.use("/", userRouter);
+app.use("/", folderRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);
