@@ -15,7 +15,6 @@ const postFolder = [
   validateFolder,
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
-    console.log(errors);
 
     if (!errors.isEmpty()) {
       return res.status(400).render("index", {
@@ -24,11 +23,23 @@ const postFolder = [
     }
     const { title } = req.body;
     const user = req.user;
-    await db.createFolder(title, user.id);
-    res.redirect("/");
+    await db.createFolder(title, user.id, req.params.name);
+    res.redirect(`/${req.params.name}`);
   }),
 ];
 
+const getSubFolders = asyncHandler(async (req, res, next) => {
+  const folder = await db.getParent(req.params.name);
+  const parent = req.params.name;
+
+  return res.render("index", {
+    title: `${req.params.name} Folder`,
+    folders: folder,
+    parent: parent,
+  });
+});
+
 module.exports = {
+  getSubFolders,
   postFolder,
 };
