@@ -4,6 +4,8 @@ const folderController = require("../controllers/folderController");
 
 const folderRouter = Router();
 
-folderRouter.post("/create-folder", folderController.postFolder);
+folderRouter.post("/:name", folderController.postFolder);
+
+folderRouter.get("/:name", folderController.getSubFolders);
 
 module.exports = folderRouter;
