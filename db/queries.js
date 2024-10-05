@@ -27,13 +27,36 @@ async function createUser(username, password) {
   });
 }
 
-async function createFolder(name, id) {
-  await prisma.folder.create({
-    data: {
-      name: name,
-      userId: id,
-    },
-  });
+async function createFolder(name, id, parent) {
+  if (parent) {
+    console.log("with parent");
+    await prisma.folder.create({
+      data: {
+        name: name,
+        userId: id,
+        subfolderId: parent,
+      },
+    });
+  } else {
+    await prisma.folder.create({
+      data: {
+        name: name,
+        userId: id,
+      },
+    });
+  }
+}
+
+async function getParent(id) {
+  if (!id) {
+    return await prisma.folder.findMany({
+      where: { parent: id },
+    });
+  } else {
+    return await prisma.folder.findMany({
+      where: { subfolderId: id },
+    });
+  }
 }
 
 module.exports = {
@@ -41,4 +64,5 @@ module.exports = {
   findUser,
   createUser,
   createFolder,
+  getParent,
 };
