@@ -1,11 +1,16 @@
 const multer = require("multer");
 const asyncHandler = require("express-async-handler");
-const { body, validationResult } = require("express-validator");
+const db = require("../db/queries");
 
 const getIndex = asyncHandler(async (req, res, next) => {
+  const folders = await db.getParent(null);
+  const parent = req.params.name;
+
   if (res.locals.currentUser) {
     res.render("index", {
       title: "CloudUp - Homepage",
+      folders: folders,
+      parent: parent,
     });
   } else {
     res.redirect("/log-in");
