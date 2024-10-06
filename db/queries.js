@@ -27,9 +27,10 @@ async function createUser(username, password) {
   });
 }
 
+// if parent is not null assign parent param (req.params.name) to subFolderId - create subfolder
+// if parent is null let prisma assign null to subfolderId - create folder
 async function createFolder(name, id, parent) {
   if (parent) {
-    console.log("with parent");
     await prisma.folder.create({
       data: {
         name: name,
@@ -47,7 +48,9 @@ async function createFolder(name, id, parent) {
   }
 }
 
-async function getParent(id) {
+// if req.params.name is null we are going to search for folders where parent is null
+// if req.params.name is not null we are going to search folders where subFolder is not null to find a match
+async function getFolders(id) {
   if (!id) {
     return await prisma.folder.findMany({
       where: { parent: id },
@@ -64,5 +67,5 @@ module.exports = {
   findUser,
   createUser,
   createFolder,
-  getParent,
+  getFolders,
 };
