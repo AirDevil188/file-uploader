@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// Prisma Database for CloudUp
 
 generator client {
   provider = "prisma-client-js"
@@ -16,7 +12,7 @@ datasource db {
 model session {
   id        String   @id
   sid       String   @unique
-  data      String   @db.Text
+  data      String
   expiresAt DateTime
 }
 
@@ -32,19 +28,22 @@ model file {
   id        String   @id @default(uuid())
   name      String   @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      users    @relation(fields: [userId], references: [id])
-  userId    String
-  folder    folder?  @relation(fields: [folderId], references: [id])
   folderId  String
+  updatedAt DateTime @updatedAt
+  userId    String
+  folder    folder   @relation(fields: [folderId], references: [id])
+  user      users    @relation(fields: [userId], references: [id])
 }
 
 model folder {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  files     file[]
-  user      users    @relation(fields: [userId], references: [id])
-  userId    String
+  id          String   @id @default(uuid())
+  name        String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String
+  subfolderId String?
+  files       file[]
+  parent      folder?  @relation("FolderSubFolder", fields: [subfolderId], references: [name])
+  subFolders  folder[] @relation("FolderSubFolder")
+  user        users    @relation(fields: [userId], references: [id])
 }
