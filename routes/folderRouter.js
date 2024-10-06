@@ -6,6 +6,6 @@ const folderRouter = Router();
 
 folderRouter.post("/:name", folderController.postFolder);
 
-folderRouter.get("/:name", folderController.getSubFolders);
+folderRouter.get("/:name", folderController.getFolders);
 
 module.exports = folderRouter;
