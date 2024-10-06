@@ -28,8 +28,8 @@ const postFolder = [
   }),
 ];
 
-const getSubFolders = asyncHandler(async (req, res, next) => {
-  const folder = await db.getParent(req.params.name);
+const getFolders = asyncHandler(async (req, res, next) => {
+  const folder = await db.getFolders(req.params.name);
   const parent = req.params.name;
 
   return res.render("index", {
@@ -40,6 +40,6 @@ const getSubFolders = asyncHandler(async (req, res, next) => {
 });
 
 module.exports = {
-  getSubFolders,
+  getFolders,
   postFolder,
 };
