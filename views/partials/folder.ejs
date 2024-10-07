@@ -1,4 +1,6 @@
+<% if (currentFolder) { %>
 <section class="folder-section">
+  <span><a href=""><%= currentUrl %></a></span>
   <% folders.map(folder => { %>
   <div class="folder" id="<%= folder.id %>">
     <div class="icon">
@@ -6,10 +8,12 @@
     </div>
     <div class="folder-name-container">
       <span class="folder-name">
-        <a href="<%= folder.name %>"><%= folder.name %></a></span
+        <a href="<%= folder.path%>"><%= folder.name %></a></span
       >
     </div>
   </div>
   <% }) %>
   <div class="folder" id="folder.id"></div>
 </section>
+
+<% } else { %> <%- include('InvalidPage') %> <% } %>
