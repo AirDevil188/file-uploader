@@ -19,27 +19,35 @@ const postFolder = [
     if (!errors.isEmpty()) {
       return res.status(400).render("index", {
         title: "CludUp - Homepage",
+        errors: errors.array(),
       });
     }
+
     const { title } = req.body;
     const user = req.user;
-    await db.createFolder(title, user.id, req.params.name);
-    res.redirect(`/${req.params.name}`);
+    const currentUrl = req.params.name
+      ? `${req.url + `/` + title}`
+      : req.url + title;
+
+    await db.createFolder(title, user.id, req.params.name, currentUrl);
+    res.redirect(currentUrl);
   }),
 ];
 
-const getFolders = asyncHandler(async (req, res, next) => {
-  const folder = await db.getFolders(req.params.name);
-  const parent = req.params.name;
+const getSubFolders = asyncHandler(async (req, res, next) => {
+  const currentUrl = req.url;
+  const subFolders = await db.getFolders(req.params.name);
+  const currentFolder = await db.getCurrentFolder(currentUrl);
 
   return res.render("index", {
     title: `${req.params.name} Folder`,
-    folders: folder,
-    parent: parent,
+    folders: subFolders,
+    currentUrl: currentUrl,
+    currentFolder: currentFolder,
   });
 });
 
 module.exports = {
-  getFolders,
+  getSubFolders,
   postFolder,
 };
