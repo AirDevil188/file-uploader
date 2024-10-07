@@ -46,4 +46,5 @@ model folder {
   parent      folder?  @relation("FolderSubFolder", fields: [subfolderId], references: [name])
   subFolders  folder[] @relation("FolderSubFolder")
   user        users    @relation(fields: [userId], references: [id])
+  path        String
 }
