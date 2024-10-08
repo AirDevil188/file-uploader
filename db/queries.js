@@ -50,7 +50,13 @@ async function createFolder(name, id, parent, path) {
   }
 }
 
-async function getCurrentFolder(id) {
+async function deleteFolder(id) {
+  await prisma.folder.delete({
+    where: { id: id },
+  });
+}
+
+async function getPathFolder(id) {
   return await prisma.folder.findFirst({
     where: { path: id },
   });

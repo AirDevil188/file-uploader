@@ -37,7 +37,7 @@ const postFolder = [
 const getSubFolders = asyncHandler(async (req, res, next) => {
   const currentUrl = req.url;
   const subFolders = await db.getFolders(req.params.name);
-  const currentFolder = await db.getCurrentFolder(currentUrl);
+  const currentFolder = await db.getPathFolder(currentUrl);
 
   return res.render("index", {
     title: `${req.params.name} Folder`,
