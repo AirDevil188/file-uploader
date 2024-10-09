@@ -28,8 +28,8 @@ const postFolder = [
     const currentUrl = req.params.name
       ? `${req.url + `/` + title}`
       : req.url + title;
-
-    await db.createFolder(title, user.id, req.params.name, currentUrl);
+    console.log(req.url, "parent");
+    await db.createFolder(title, user.id, req.params.name, currentUrl, req.url);
     res.redirect(currentUrl);
   }),
 ];
@@ -47,7 +47,14 @@ const getSubFolders = asyncHandler(async (req, res, next) => {
   });
 });
 
+const postDeleteFolder = asyncHandler(async (req, res, next) => {
+  const folder = await db.getFolder(req.params.id);
+  await db.deleteFolder(req.params.id);
+  res.redirect(folder.parentPath);
+});
+
 module.exports = {
   getSubFolders,
   postFolder,
+  postDeleteFolder,
 };

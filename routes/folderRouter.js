@@ -8,4 +8,6 @@ folderRouter.post("*/:name", folderController.postFolder);
 
 folderRouter.get("*/:name", folderController.getSubFolders);
 
+folderRouter.post("/delete/:id", folderController.postDeleteFolder);
+
 module.exports = folderRouter;
