@@ -78,6 +78,20 @@ async function getFolders(id) {
   }
 }
 
+async function getFolder(id) {
+  return await prisma.folder.findFirst({
+    where: { id: id },
+  });
+}
+
+async function deleteFolder(id) {
+  return await prisma.folder.delete({
+    where: {
+      id: id,
+    },
+  });
+}
+
 module.exports = {
   deserializeUser,
   findUser,
@@ -85,5 +99,7 @@ module.exports = {
   createFolder,
   deleteFolder,
   getPathFolder,
+  getFolder,
+  deleteFolder,
   getFolders,
 };

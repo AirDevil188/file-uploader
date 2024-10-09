@@ -31,7 +31,7 @@ model file {
   folderId  String
   updatedAt DateTime @updatedAt
   userId    String
-  folder    folder   @relation(fields: [folderId], references: [id])
+  folder    folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
   user      users    @relation(fields: [userId], references: [id])
 }
 
@@ -43,7 +43,7 @@ model folder {
   userId      String
   subfolderId String?
   files       file[]
-  parent      folder?  @relation("FolderSubFolder", fields: [subfolderId], references: [name])
+  parent      folder?  @relation("FolderSubFolder", fields: [subfolderId], references: [name], onDelete: Cascade)
   subFolders  folder[] @relation("FolderSubFolder")
   user        users    @relation(fields: [userId], references: [id])
   path        String
