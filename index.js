@@ -15,7 +15,7 @@ dotenv.config();
 const port = process.env.PORT;
 const app = express();
 
-app.use(express.static("./"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
