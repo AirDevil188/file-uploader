@@ -1,8 +1,10 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="../stylesheet/main.css" />
-    <script src="../scripts/dialogControl.js" defer></script>
+    <link rel="stylesheet" href="/stylesheet/main.css" />
+    <script src="/scripts/dialogControl.js" defer></script>
+    <script src="/scripts/folderControl.js" type="module" defer></script>
+    <script src="/scripts/toolbarControl.js" type="module" defer></script>
   </head>
   <body>
     <header></header>
@@ -11,6 +13,7 @@
       <span class="material-symbols-outlined open-button">
         create_new_folder
       </span>
+      <%-include('./partials/toolbar') %>
       <section class="form-section">
         <form action="/file-upload" method="POST" enctype="multipart/form-data">
           <div class="form-group">
