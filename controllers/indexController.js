@@ -12,8 +12,6 @@ const getIndex = asyncHandler(async (req, res, next) => {
     currentUrl: currentUrl,
     currentFolder: "/",
   });
-
-  res.redirect("/log-in");
 });
 
 module.exports = {
