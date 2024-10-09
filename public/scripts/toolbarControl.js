@@ -27,3 +27,19 @@ export const toolbarControl = (e) => {
   deleteHyperLink.setAttribute("href", `delete/${e.currentTarget.id}`);
   updateHyperlink.setAttribute("href", `update/${e.currentTarget.id}`);
 };
+
+const closeToolbar = () => {
+  const closeBtn = document.querySelector(".close-btn");
+  const folders = document.querySelectorAll(".folder");
+  const toolbar = document.querySelector(".toolbar-section");
+  closeBtn.addEventListener("click", () => {
+    const clickedIcons = Array.from(folders).find((folder) =>
+      folder.classList.contains("clicked")
+    );
+    if (clickedIcons) {
+      toolbar.setAttribute("hidden", "");
+    }
+  });
+};
+
+closeToolbar();
