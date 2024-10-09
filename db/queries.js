@@ -82,6 +82,6 @@ module.exports = {
   createUser,
   createFolder,
   deleteFolder,
-  getCurrentFolder,
+  getPathFolder,
   getFolders,
 };
