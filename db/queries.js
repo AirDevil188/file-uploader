@@ -52,6 +52,15 @@ async function deleteFolder(id) {
   });
 }
 
+async function updateFolder(id, name) {
+  await prisma.folder.update({
+    where: { id: id },
+    data: {
+      name: name,
+    },
+  });
+}
+
 async function getFolders(id) {
   if (!id) {
     return await prisma.folder.findMany({
@@ -86,5 +95,6 @@ module.exports = {
   deleteFolder,
   getFolder,
   deleteFolder,
+  updateFolder,
   getFolders,
 };
