@@ -27,17 +27,13 @@ async function createUser(username, password) {
   });
 }
 
-// if parent is not null assign parent param (req.params.name) to subFolderId - create subfolder
-// if parent is null let prisma assign null to subfolderId - create folder
-async function createFolder(name, id, parent, path, parentPath) {
+async function createFolder(name, id, parent) {
   if (parent) {
     await prisma.folder.create({
       data: {
         name: name,
         userId: id,
-        subfolderId: parent,
-        path: path,
-        parentPath: parentPath,
+        parentId: parent,
       },
     });
   } else {
@@ -45,8 +41,6 @@ async function createFolder(name, id, parent, path, parentPath) {
       data: {
         name: name,
         userId: id,
-        path: path,
-        parentPath: "/",
       },
     });
   }
@@ -58,14 +52,6 @@ async function deleteFolder(id) {
   });
 }
 
-async function getPathFolder(id) {
-  return await prisma.folder.findFirst({
-    where: { path: id },
-  });
-}
-
-// if req.params.name is null we are going to search for folders where parent is null
-// if req.params.name is not null we are going to search folders where subFolder is not null to find a match
 async function getFolders(id) {
   if (!id) {
     return await prisma.folder.findMany({
@@ -73,7 +59,7 @@ async function getFolders(id) {
     });
   } else {
     return await prisma.folder.findMany({
-      where: { subfolderId: id },
+      where: { parentId: id },
     });
   }
 }
@@ -98,7 +84,6 @@ module.exports = {
   createUser,
   createFolder,
   deleteFolder,
-  getPathFolder,
   getFolder,
   deleteFolder,
   getFolders,
