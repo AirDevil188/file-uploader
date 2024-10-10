@@ -6,7 +6,7 @@ const indexController = require("../controllers/indexController");
 const folderController = require("../controllers/folderController");
 const isAuth = require("../middlewares/isAuth");
 
-const indexRouter = Router();
+const indexRouter = Router({ mergeParams: true });
 
 indexRouter.get("/", isAuth.isAuth, indexController.getIndex);
 
