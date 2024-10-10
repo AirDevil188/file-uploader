@@ -19,6 +19,11 @@ indexRouter.post(
 );
 
 indexRouter.post(
+  "/update/:id",
+  isAuth.isAuth,
+  folderController.postUpdateFolder
+);
+indexRouter.post(
   "/file-upload",
   upload.array("file_upload"),
   (req, res, next) => {}

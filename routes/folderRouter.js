@@ -11,6 +11,12 @@ folderRouter.post("/:id", isAuth.isAuth, folderController.postFolder);
 folderRouter.get("/:id", isAuth.isAuth, folderController.getSubFolders);
 
 folderRouter.post(
+  "/update/:id",
+  isAuth.isAuth,
+  folderController.postUpdateFolder
+);
+
+folderRouter.post(
   "/delete/:id",
   isAuth.isAuth,
   folderController.postDeleteFolder

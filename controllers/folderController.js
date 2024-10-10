@@ -53,8 +53,18 @@ const postDeleteFolder = asyncHandler(async (req, res, next) => {
   } else res.redirect(`/${folder.parentId}`);
 });
 
+const postUpdateFolder = asyncHandler(async (req, res, next) => {
+  const folder = await db.getFolder(req.params.id);
+  const { title } = req.body;
+  await db.updateFolder(req.params.id, title);
+  if (!folder.parentId) {
+    res.redirect("/");
+  } else res.redirect(`/${folder.parentId}`);
+});
+
 module.exports = {
   getSubFolders,
   postFolder,
   postDeleteFolder,
+  postUpdateFolder,
 };
