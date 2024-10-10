@@ -8,8 +8,18 @@ document.addEventListener("click", (e) => {
   const outsideClickToolbar = !document
     .querySelector(".toolbar-section")
     .contains(e.target);
+  const outsideDialogClick = !document
+    .querySelector(".dialog")
+    .contains(e.target);
 
-  if (outsideClickFolderSection && outsideClickToolbar && clickedFolder) {
+  const arrElements = [
+    clickedFolder,
+    outsideClickFolderSection,
+    outsideClickToolbar,
+    outsideDialogClick,
+  ];
+
+  if (arrElements.every(Boolean)) {
     clickedFolder.classList.remove("clicked");
     hideToolbar();
   }
