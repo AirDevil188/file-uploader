@@ -41,9 +41,12 @@ const deleteFolderDialog = () => {
   deleteBtn.addEventListener("click", (e) => {
     deleteDialog.showModal();
     cancelBtn.setAttribute("type", "button");
-    // cancelBtn.setAttribute("onClick", `${deleteDialog.close}`)
     dialogForm.setAttribute("method", "post");
     dialogForm.setAttribute("action", `delete/${e.currentTarget.id}`);
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    deleteDialog.close();
   });
 };
 newFolderDialog();
