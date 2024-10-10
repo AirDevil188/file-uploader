@@ -21,11 +21,11 @@ export const hideToolbar = () => {
 
 export const toolbarControl = (e) => {
   const form = document.querySelector(".toolbar-form");
-  const deleteHyperLink = document.querySelector(".delete-link");
-  const updateHyperlink = document.querySelector(".update-link");
+  const deleteBtn = document.querySelector(".delete-btn");
+  const updateBtn = document.querySelector(".edit-btn");
   form.setAttribute("action", `delete/${e.currentTarget.id}`);
-  deleteHyperLink.setAttribute("href", `delete/${e.currentTarget.id}`);
-  updateHyperlink.setAttribute("href", `update/${e.currentTarget.id}`);
+  deleteBtn.setAttribute("id", e.currentTarget.id);
+  updateBtn.setAttribute("id", e.currentTarget.id);
 };
 
 const closeToolbar = () => {
