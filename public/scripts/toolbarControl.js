@@ -3,7 +3,6 @@ export const showToolbar = () => {
   const toolbar = document.querySelector(".toolbar-section");
   folders.forEach((folder) => {
     if (folder.classList.contains("clicked")) {
-      console.log("contains");
       toolbar.removeAttribute("hidden");
     }
   });
