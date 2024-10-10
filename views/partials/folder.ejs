@@ -1,5 +1,4 @@
 <% if (currentFolder) { %>
-<span><a href=""><%= currentUrl %></a></span>
 <section class="folder-section">
   <% folders.map(folder => { %>
   <div class="folder" id="<%= folder.id %>">
@@ -8,7 +7,7 @@
     </div>
     <div class="folder-name-container">
       <span class="folder-name">
-        <a href="<%= folder.path%>"><%= folder.name %></a></span
+        <a href="<%= folder.id%>"><%= folder.name %></a></span
       >
     </div>
   </div>
