@@ -8,15 +8,19 @@ document.addEventListener("click", (e) => {
   const outsideClickToolbar = !document
     .querySelector(".toolbar-section")
     .contains(e.target);
-  const outsideDialogClick = !document
+  const outsideEditDialogClick = !document
     .querySelector(".dialog")
+    .contains(e.target);
+  const outsideDeleteDialogClick = !document
+    .querySelector(".dialog-delete")
     .contains(e.target);
 
   const arrElements = [
     clickedFolder,
     outsideClickFolderSection,
     outsideClickToolbar,
-    outsideDialogClick,
+    outsideEditDialogClick,
+    outsideDeleteDialogClick,
   ];
 
   if (arrElements.every(Boolean)) {
