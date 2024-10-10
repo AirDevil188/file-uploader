@@ -25,19 +25,15 @@ const postFolder = [
 
     const { title } = req.body;
     const user = req.user;
-    const currentUrl = req.params.name
-      ? `${req.url + `/` + title}`
-      : req.url + title;
-    console.log(req.url, "parent");
-    await db.createFolder(title, user.id, req.params.name, currentUrl, req.url);
-    res.redirect(currentUrl);
+    await db.createFolder(title, user.id, req.params.id);
+    res.redirect(`/${req.params.id}`);
   }),
 ];
 
 const getSubFolders = asyncHandler(async (req, res, next) => {
   const currentUrl = req.url;
-  const subFolders = await db.getFolders(req.params.name);
-  const currentFolder = await db.getPathFolder(currentUrl);
+  const subFolders = await db.getFolders(req.params.id);
+  const currentFolder = await db.getFolder(req.params.id);
 
   return res.render("index", {
     title: `${req.params.name} Folder`,
