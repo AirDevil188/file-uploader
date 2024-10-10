@@ -23,7 +23,6 @@ export const toolbarControl = (e) => {
   const form = document.querySelector(".toolbar-form");
   const deleteBtn = document.querySelector(".delete-btn");
   const updateBtn = document.querySelector(".edit-btn");
-  form.setAttribute("action", `delete/${e.currentTarget.id}`);
   deleteBtn.setAttribute("id", e.currentTarget.id);
   updateBtn.setAttribute("id", e.currentTarget.id);
 };
