@@ -26,7 +26,9 @@ const postFolder = [
     const { title } = req.body;
     const user = req.user;
     await db.createFolder(title, user.id, req.params.id);
-    res.redirect(`/${req.params.id}`);
+    if (req.params.id) {
+      res.redirect(`/${req.params.id}`);
+    } else res.redirect("/");
   }),
 ];
 
@@ -46,7 +48,10 @@ const getSubFolders = asyncHandler(async (req, res, next) => {
 const postDeleteFolder = asyncHandler(async (req, res, next) => {
   const folder = await db.getFolder(req.params.id);
   await db.deleteFolder(req.params.id);
-  res.redirect(folder.parentPath);
+  if (req.params.id) {
+    res.redirect("/");
+  } else res.redirect("/");
+  res.redirect(`/${folder.parentId}`);
 });
 
 module.exports = {
