@@ -25,10 +25,9 @@
           </div>
         </form>
       </section>
-      <%- include('./partials/folder', {currentFolder: currentFolder,
-      currentUrl: currentUrl}) %> <%- include('./partials/modal', {currentUrl:
-      currentUrl}) %> <%- include('./partials/folder_delete', {currentUrl:
-      currentUrl}) %>
+      <%- include('./partials/folder', {currentFolder: currentFolder}) %> <%-
+      include('./partials/modal', {currentFolder: currentFolder, currentUrl:
+      currentUrl}) %> <%- include('./partials/folder_delete') %>
     </main>
   </body>
   <footer></footer>
