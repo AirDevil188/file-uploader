@@ -27,20 +27,18 @@ const postFolder = [
     const user = req.user;
     await db.createFolder(title, user.id, req.params.id);
     if (req.params.id) {
-      res.redirect(`/${req.params.id}`);
+      res.redirect(`/drive/${req.params.id}`);
     } else res.redirect("/");
   }),
 ];
 
 const getSubFolders = asyncHandler(async (req, res, next) => {
-  const currentUrl = req.url;
   const subFolders = await db.getFolders(req.params.id);
   const currentFolder = await db.getFolder(req.params.id);
 
   return res.render("index", {
     title: `${req.params.name} Folder`,
     folders: subFolders,
-    currentUrl: currentUrl,
     currentFolder: currentFolder,
   });
 });
@@ -50,7 +48,7 @@ const postDeleteFolder = asyncHandler(async (req, res, next) => {
   await db.deleteFolder(req.params.id);
   if (!folder.parentId) {
     res.redirect("/");
-  } else res.redirect(`/${folder.parentId}`);
+  } else res.redirect(`/drive/${folder.parentId}`);
 });
 
 const postUpdateFolder = asyncHandler(async (req, res, next) => {
@@ -59,7 +57,7 @@ const postUpdateFolder = asyncHandler(async (req, res, next) => {
   await db.updateFolder(req.params.id, title);
   if (!folder.parentId) {
     res.redirect("/");
-  } else res.redirect(`/${folder.parentId}`);
+  } else res.redirect(`/drive/${folder.parentId}`);
 });
 
 module.exports = {
