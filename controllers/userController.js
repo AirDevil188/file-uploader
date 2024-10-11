@@ -20,13 +20,9 @@ const validateNewUser = [
 ];
 
 const getLogIn = asyncHandler(async (req, res, next) => {
-  if (res.locals.currentUser) {
-    res.redirect("/");
-  } else {
-    res.render("log-in", {
-      title: "CloudUp - Log In",
-    });
-  }
+  return res.render("log-in", {
+    title: "CloudUp - Log In",
+  });
 });
 
 const postLogIn = [
