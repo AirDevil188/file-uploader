@@ -15,12 +15,16 @@ document.addEventListener("click", (e) => {
     .querySelector(".dialog-delete")
     .contains(e.target);
 
+  const outsideAddFileDialogClick = !document
+    .querySelector(".dialog-add-file")
+    .contains(e.target);
   const arrElements = [
     clickedFolder,
     outsideClickFolderSection,
     outsideClickToolbar,
     outsideEditDialogClick,
     outsideDeleteDialogClick,
+    outsideAddFileDialogClick,
   ];
 
   if (arrElements.every(Boolean)) {

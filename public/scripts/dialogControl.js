@@ -1,5 +1,6 @@
 const newFolderBtn = document.querySelector(".open-button");
 const deleteDialog = document.querySelector(".dialog-delete");
+const addFileDialog = document.querySelector(".dialog-add-file");
 
 const dialog = document.querySelectorAll("dialog");
 const dialogSection = document.querySelectorAll(".dialog-section");
@@ -49,8 +50,18 @@ const deleteFolderDialog = () => {
     deleteDialog.close();
   });
 };
+
+const uploadFolderDialog = () => {
+  const addFileBtn = document.querySelector(".add-file-btn");
+
+  addFileBtn.addEventListener("click", (e) => {
+    addFileDialog.showModal();
+  });
+};
 newFolderDialog();
 editFolderDialog();
+uploadFolderDialog();
 deleteFolderDialog();
 closeDialogOutsideListener(0);
 closeDialogOutsideListener(1);
+closeDialogOutsideListener(2);

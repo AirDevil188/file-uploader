@@ -15,7 +15,7 @@ indexRouter.get("/drive/:id", isAuth.isAuth, indexController.getIndex);
 indexRouter.post("/drive/:id", isAuth.isAuth, folderController.postFolder);
 
 indexRouter.post(
-  "/file-upload",
+  "drive/file-upload/:id",
   upload.array("file_upload"),
   (req, res, next) => {}
 );
