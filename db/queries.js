@@ -3,29 +3,19 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function deserializeUser(id) {
-  try {
-    const user = await prisma.users.findUnique({
-      where: {
-        id: id,
-      },
-    });
-    return user;
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
+  const user = await prisma.users.findUnique({
+    where: {
+      id: id,
+    },
+  });
+  return user;
 }
 
 async function findUser(username) {
-  try {
-    const user = await prisma.users.findUnique({
-      where: { username: username },
-    });
-    return user;
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
+  const user = await prisma.users.findUnique({
+    where: { username: username },
+  });
+  return user;
 }
 
 async function createUser(username, password) {
@@ -34,6 +24,20 @@ async function createUser(username, password) {
       data: {
         username: username,
         password: password,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
+async function createDriveFolder(userId) {
+  try {
+    await prisma.folder.create({
+      data: {
+        name: "drive",
+        userId: userId,
       },
     });
   } catch (err) {
@@ -93,15 +97,20 @@ async function updateFolder(id, name) {
 
 async function getFolders(id) {
   try {
-    if (!id) {
-      return await prisma.folder.findMany({
-        where: { parent: id },
-      });
-    } else {
-      return await prisma.folder.findMany({
-        where: { parentId: id },
-      });
-    }
+    return await prisma.folder.findMany({
+      where: { parentId: id },
+    });
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
+async function getDriveFolder() {
+  try {
+    return await prisma.folder.findFirst({
+      where: { name: "drive" },
+    });
   } catch (err) {
     console.error(err);
     throw err;
@@ -124,7 +133,9 @@ module.exports = {
   findUser,
   createUser,
   createFolder,
+  createDriveFolder,
   deleteFolder,
+  getDriveFolder,
   getFolder,
   deleteFolder,
   updateFolder,
