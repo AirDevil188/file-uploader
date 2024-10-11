@@ -95,10 +95,10 @@ async function updateFolder(id, name) {
   }
 }
 
-async function getFolders(id) {
+async function getFolders(id, userId) {
   try {
     return await prisma.folder.findMany({
-      where: { parentId: id },
+      where: { parentId: id, userId: userId },
     });
   } catch (err) {
     console.error(err);
@@ -106,10 +106,10 @@ async function getFolders(id) {
   }
 }
 
-async function getDriveFolder() {
+async function getDriveFolder(userId) {
   try {
     return await prisma.folder.findFirst({
-      where: { name: "drive" },
+      where: { name: "drive", userId: userId },
     });
   } catch (err) {
     console.error(err);
@@ -117,10 +117,10 @@ async function getDriveFolder() {
   }
 }
 
-async function getFolder(id) {
+async function getFolder(id, userId) {
   try {
     return await prisma.folder.findFirst({
-      where: { id: id },
+      where: { id: id, userId: userId },
     });
   } catch (err) {
     console.error(err);
