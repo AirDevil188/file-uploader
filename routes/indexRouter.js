@@ -8,21 +8,12 @@ const isAuth = require("../middlewares/isAuth");
 
 const indexRouter = Router({ mergeParams: true });
 
-indexRouter.get("/", isAuth.isAuth, indexController.getIndex);
+indexRouter.get("/", isAuth.isAuth, indexController.createDriveFolder);
 
-indexRouter.post("/", isAuth.isAuth, folderController.postFolder);
+indexRouter.get("/drive/:id", isAuth.isAuth, indexController.getIndex);
 
-indexRouter.post(
-  "/delete/:id",
-  isAuth.isAuth,
-  folderController.postDeleteFolder
-);
+indexRouter.post("/drive/:id", isAuth.isAuth, folderController.postFolder);
 
-indexRouter.post(
-  "/update/:id",
-  isAuth.isAuth,
-  folderController.postUpdateFolder
-);
 indexRouter.post(
   "/file-upload",
   upload.array("file_upload"),
