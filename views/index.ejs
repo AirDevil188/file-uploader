@@ -24,10 +24,21 @@
             <button type="submit">Submit</button>
           </div>
         </form>
+        <section class="menu-buttons">
+          <% if (currentFolder.parentId) { %>
+
+          <button>
+            <span class="material-symbols-outlined">
+              <a href="/drive/<%=currentFolder.parentId%>">arrow_back</a></span
+            >
+          </button>
+
+          <% } %>
+        </section>
       </section>
       <%- include('./partials/folder', {currentFolder: currentFolder}) %> <%-
-      include('./partials/modal', {currentFolder: currentFolder, currentUrl:
-      currentUrl}) %> <%- include('./partials/folder_delete') %>
+      include('./partials/modal', {currentFolder: currentFolder, }) %> <%-
+      include('./partials/folder_delete') %>
     </main>
   </body>
   <footer></footer>
