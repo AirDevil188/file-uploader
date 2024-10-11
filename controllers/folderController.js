@@ -33,8 +33,14 @@ const postFolder = [
 ];
 
 const getSubFolders = asyncHandler(async (req, res, next) => {
-  const subFolders = await db.getFolders(req.params.id);
-  const currentFolder = await db.getFolder(req.params.id);
+  const subFolders = await db.getFolders(
+    req.params.id,
+    res.locals.currentUser.id
+  );
+  const currentFolder = await db.getFolder(
+    req.params.id,
+    res.locals.currentUser.id
+  );
 
   return res.render("index", {
     title: `${req.params.name} Folder`,
@@ -44,7 +50,7 @@ const getSubFolders = asyncHandler(async (req, res, next) => {
 });
 
 const postDeleteFolder = asyncHandler(async (req, res, next) => {
-  const folder = await db.getFolder(req.params.id);
+  const folder = await db.getFolder(req.params.id, res.locals.currentUser.id);
   await db.deleteFolder(req.params.id);
   if (!folder.parentId) {
     res.redirect("/");
@@ -52,7 +58,7 @@ const postDeleteFolder = asyncHandler(async (req, res, next) => {
 });
 
 const postUpdateFolder = asyncHandler(async (req, res, next) => {
-  const folder = await db.getFolder(req.params.id);
+  const folder = await db.getFolder(req.params.id, res.locals.currentUser.id);
   const { title } = req.body;
   await db.updateFolder(req.params.id, title);
   if (!folder.parentId) {

@@ -6,16 +6,22 @@ const createDriveFolder = asyncHandler(async (req, res, next) => {
   const driveFolder = await db.getDriveFolder("drive");
   if (!driveFolder) {
     await db.createDriveFolder(res.locals.currentUser.id);
-    const driveFolder = await db.getDriveFolder("drive");
+    const driveFolder = await db.getDriveFolder(res.locals.currentUser.id);
     res.redirect(`drive/${driveFolder.id}`);
   }
   res.redirect(`drive/${driveFolder.id}`);
 });
 
 const getIndex = asyncHandler(async (req, res, next) => {
-  const driveFolder = await db.getFolder(req.params.id);
+  const driveFolder = await db.getFolder(
+    req.params.id,
+    res.locals.currentUser.id
+  );
   const currentUrl = req.url;
-  const folders = await db.getFolders(driveFolder.id);
+  const folders = await db.getFolders(
+    driveFolder.id,
+    res.locals.currentUser.id
+  );
   console.log(req.params.id);
 
   res.render("index", {
