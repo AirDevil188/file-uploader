@@ -42,6 +42,10 @@ const getSubFolders = asyncHandler(async (req, res, next) => {
     res.locals.currentUser.id
   );
 
+  if (!currentFolder) {
+    return res.status(404).render("404");
+  }
+
   return res.render("index", {
     title: `${req.params.name} Folder`,
     folders: subFolders,
