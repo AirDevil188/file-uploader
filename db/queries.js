@@ -128,12 +128,32 @@ async function getFolder(id, userId) {
   }
 }
 
+async function createFiles(name, size, url, folderId, userId) {
+  try {
+    return await prisma.file.createMany({
+      data: [
+        {
+          name: name,
+          size: size,
+          url: url,
+          folderId: folderId,
+          userId: userId,
+        },
+      ],
+    });
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
 module.exports = {
   deserializeUser,
   findUser,
   createUser,
   createFolder,
   createDriveFolder,
+  createFiles,
   deleteFolder,
   getDriveFolder,
   getFolder,
