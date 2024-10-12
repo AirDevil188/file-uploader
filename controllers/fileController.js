@@ -6,6 +6,8 @@ const dotenv = require("dotenv");
 const db = require("../db/queries");
 dotenv.config();
 
+cloudinary.config().cloud_name;
+
 const validateFile = [
   body("file_upload").isEmpty().withMessage("Select at least one file"),
 ];
@@ -15,27 +17,36 @@ const postFileUpload = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     const currentUrl = req.url;
+    const currentFolder = await db.getFolder(
+      req.params.id,
+      res.locals.currentUser.id
+    );
 
     if (!errors.isEmpty()) {
-      console.log("errors");
-      const currentFolder = await db.getFolder(
-        req.params.id,
-        res.locals.currentUser.id
-      );
       const folders = await db.getFolders(
         currentFolder.id,
         res.locals.currentUser
       );
+      const files = await db.getFiles(req.params.id, res.locals.currentUser.id);
       return res.status(400).render("index", {
         title: "CludUp - Homepage",
         errors: errors.array(),
         folders: folders,
+        files: files,
         currentFolder: currentFolder,
         currentUrl: currentUrl,
       });
     }
-
-    console.log(req.files);
+    req.files.forEach(async (file) => {
+      const files = await cloudinary.uploader.upload(file.path);
+      await db.createFiles(
+        file.originalname,
+        file.size,
+        files.url,
+        currentFolder.id,
+        res.locals.currentUser.id
+      );
+    });
   }),
 ];
 
