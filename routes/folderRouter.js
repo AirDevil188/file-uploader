@@ -1,14 +1,13 @@
 const { Router } = require("express");
 
 const folderController = require("../controllers/folderController");
+const fileController = require("../controllers/fileController");
 
 const isAuth = require("../middlewares/isAuth");
 
 const folderRouter = Router({ mergeParams: true });
 
 folderRouter.post("/drive/:id", isAuth.isAuth, folderController.postFolder);
-
-folderRouter.get("/drive/:id", isAuth.isAuth, folderController.getSubFolders);
 
 folderRouter.post(
   "/drive/update/:id",
