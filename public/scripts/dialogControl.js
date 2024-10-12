@@ -1,67 +1,96 @@
-const newFolderBtn = document.querySelector(".open-button");
 const deleteDialog = document.querySelector(".dialog-delete");
 const addFileDialog = document.querySelector(".dialog-add-file");
-
 const dialog = document.querySelectorAll("dialog");
 const dialogSection = document.querySelectorAll(".dialog-section");
-const overlay = document.querySelector(".overlay");
 
 const newFolderDialog = () => {
-  newFolderBtn.addEventListener("click", () => {
-    dialog[0].showModal();
-  });
+  const newFolderBtn = document.querySelector(".open-button");
+  if (newFolderBtn) {
+    newFolderBtn.addEventListener("click", () => {
+      dialog[0].showModal();
+      closeDialogOutsideListener("dialog-add-folder");
+    });
+  } else return;
 };
 
 const editFolderDialog = () => {
   const editBtn = document.querySelector(".edit-btn");
-  const dialogForm = document.querySelector(".dialog-form");
+  if (editBtn) {
+    const dialogForm = document.querySelector(".dialog-form");
 
-  editBtn.addEventListener("click", (e) => {
-    dialog[0].showModal();
-    dialogForm.setAttribute("action", `update/${e.currentTarget.id}`);
-  });
+    editBtn.addEventListener("click", (e) => {
+      dialog[0].showModal();
+      dialogForm.setAttribute("action", `update/${e.currentTarget.id}`);
+      closeDialogOutsideListener("dialog-add-folder");
+    });
+  } else return;
 };
 
-const closeDialogOutsideListener = (para) => {
-  // close dialog if the event listener is detected outside of the dialog element
-  if (dialogSection[para].contains(dialog[para])) {
-    document.querySelectorAll("dialog")[para].addEventListener("click", (e) => {
-      if (e.target.tagName === "DIALOG") {
-        e.target.close();
-      }
-    });
+const closeDialogOutsideListener = (dialog) => {
+  switch (dialog) {
+    case "dialog-add-file":
+      document
+        .querySelector(".dialog-add-file")
+        .addEventListener("click", (e) => {
+          if (e.target.tagName === "DIALOG") {
+            e.target.close();
+          }
+        });
+      break;
+    case "dialog-delete":
+      document
+        .querySelector(".dialog-delete")
+        .addEventListener("click", (e) => {
+          if (e.target.tagName === "DIALOG") {
+            e.target.close();
+          }
+        });
+      break;
+    case "dialog-add-folder":
+      document
+        .querySelector(".dialog-add-folder")
+        .addEventListener("click", (e) => {
+          if (e.target.tagName === "DIALOG") {
+            e.target.close();
+          }
+        });
+
+      break;
   }
 };
 
 const deleteFolderDialog = () => {
   const deleteBtn = document.querySelector(".delete-btn");
   const cancelBtn = document.querySelector(".cancel-btn");
+  if (deleteBtn) {
+    const dialogForm = document.querySelector(".folder-delete-form");
 
-  const dialogForm = document.querySelector(".folder-delete-form");
-
-  deleteBtn.addEventListener("click", (e) => {
-    deleteDialog.showModal();
-    cancelBtn.setAttribute("type", "button");
-    dialogForm.setAttribute("method", "post");
-    dialogForm.setAttribute("action", `delete/${e.currentTarget.id}`);
-  });
-
-  cancelBtn.addEventListener("click", () => {
-    deleteDialog.close();
-  });
+    deleteBtn.addEventListener("click", (e) => {
+      deleteDialog.showModal();
+      cancelBtn.setAttribute("type", "button");
+      dialogForm.setAttribute("method", "post");
+      dialogForm.setAttribute("action", `delete/${e.currentTarget.id}`);
+      closeDialogOutsideListener("dialog-delete");
+    });
+    if (cancelBtn) {
+      cancelBtn.addEventListener("click", () => {
+        deleteDialog.close();
+      });
+    }
+  } else return;
 };
 
 const uploadFolderDialog = () => {
   const addFileBtn = document.querySelector(".add-file-btn");
-
-  addFileBtn.addEventListener("click", (e) => {
-    addFileDialog.showModal();
-  });
+  if (addFileBtn) {
+    addFileBtn.addEventListener("click", (e) => {
+      addFileDialog.showModal();
+      closeDialogOutsideListener("dialog-add-file");
+    });
+  } else return;
 };
+
 newFolderDialog();
 editFolderDialog();
 uploadFolderDialog();
 deleteFolderDialog();
-closeDialogOutsideListener(0);
-closeDialogOutsideListener(1);
-closeDialogOutsideListener(2);

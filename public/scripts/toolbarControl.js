@@ -1,18 +1,18 @@
 export const showToolbar = () => {
-  const folders = document.querySelectorAll(".folder");
+  const allData = document.querySelectorAll(".data");
   const toolbar = document.querySelector(".toolbar-section");
-  folders.forEach((folder) => {
-    if (folder.classList.contains("clicked")) {
+  allData.forEach((data) => {
+    if (data.classList.contains("clicked")) {
       toolbar.removeAttribute("hidden");
     }
   });
 };
 
 export const hideToolbar = () => {
-  const folders = document.querySelectorAll(".folder");
+  const allData = document.querySelectorAll(".data");
   const toolbar = document.querySelector(".toolbar-section");
-  folders.forEach((folder) => {
-    if (!folder.classList.contains("clicked")) {
+  allData.forEach((data) => {
+    if (!data.classList.contains("clicked")) {
       toolbar.setAttribute("hidden", "");
     }
   });
@@ -28,11 +28,11 @@ export const toolbarControl = (e) => {
 
 const closeToolbar = () => {
   const closeBtn = document.querySelector(".close-btn");
-  const folders = document.querySelectorAll(".folder");
+  const allData = document.querySelectorAll(".data");
   const toolbar = document.querySelector(".toolbar-section");
   closeBtn.addEventListener("click", () => {
-    const clickedIcons = Array.from(folders).find((folder) =>
-      folder.classList.contains("clicked")
+    const clickedIcons = Array.from(allData).find((data) =>
+      data.classList.contains("clicked")
     );
     if (clickedIcons) {
       toolbar.setAttribute("hidden", "");

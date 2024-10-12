@@ -3,7 +3,7 @@ import { toolbarControl, showToolbar, hideToolbar } from "./toolbarControl.js";
 document.addEventListener("click", (e) => {
   const clickedFolder = document.querySelector(".clicked");
   const outsideClickFolderSection = !document
-    .querySelector(".folder-section")
+    .querySelector(".data-section")
     .contains(e.target);
   const outsideClickToolbar = !document
     .querySelector(".toolbar-section")
@@ -33,11 +33,11 @@ document.addEventListener("click", (e) => {
   }
 });
 
-const allFolders = document.querySelectorAll(".folder");
+const allData = document.querySelectorAll(".data");
 // add eventListeners to the folders
 const folderEventListener = () => {
-  allFolders.forEach((folder) => {
-    folder.addEventListener("click", (e) => {
+  allData.forEach((file) => {
+    file.addEventListener("click", (e) => {
       filterClickedFolder();
       e.currentTarget.classList.add("clicked");
       toolbarControl(e);
@@ -47,8 +47,8 @@ const folderEventListener = () => {
 };
 
 const filterClickedFolder = () => {
-  const clickedIcons = Array.from(allFolders).find((folder) =>
-    folder.classList.contains("clicked")
+  const clickedIcons = Array.from(allData).find((file) =>
+    file.classList.contains("clicked")
   );
   if (clickedIcons) {
     clickedIcons.classList.remove("clicked");
