@@ -32,27 +32,6 @@ const postFolder = [
   }),
 ];
 
-const getSubFolders = asyncHandler(async (req, res, next) => {
-  const subFolders = await db.getFolders(
-    req.params.id,
-    res.locals.currentUser.id
-  );
-  const currentFolder = await db.getFolder(
-    req.params.id,
-    res.locals.currentUser.id
-  );
-
-  if (!currentFolder) {
-    return res.status(404).render("404");
-  }
-
-  return res.render("index", {
-    title: `${req.params.name} Folder`,
-    folders: subFolders,
-    currentFolder: currentFolder,
-  });
-});
-
 const postDeleteFolder = asyncHandler(async (req, res, next) => {
   const folder = await db.getFolder(req.params.id, res.locals.currentUser.id);
   await db.deleteFolder(req.params.id);
@@ -71,7 +50,6 @@ const postUpdateFolder = asyncHandler(async (req, res, next) => {
 });
 
 module.exports = {
-  getSubFolders,
   postFolder,
   postDeleteFolder,
   postUpdateFolder,
