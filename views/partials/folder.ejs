@@ -1,17 +1,12 @@
-<% if (currentFolder) { %>
-<section class="folder-section">
-  <% folders.map(folder => { %>
-  <div class="folder" id="<%= folder.id %>">
-    <div class="icon">
-      <span class="material-symbols-outlined"> folder </span>
-    </div>
-    <div class="folder-name-container">
-      <span class="folder-name">
-        <a href="<%= folder.id%>"><%= folder.name %></a></span
-      >
-    </div>
+<% if (currentFolder) { %> <% folders.map(folder => { %>
+<div class="data" id="<%= folder.id %>">
+  <div class="icon">
+    <span class="material-symbols-outlined"> folder </span>
   </div>
-  <% }) %>
-</section>
-
-<% } else { %> <%- include('InvalidPage') %> <% } %>
+  <div class="folder-name-container">
+    <span class="folder-name">
+      <a href="<%= folder.id%>"><%= folder.name %></a></span
+    >
+  </div>
+</div>
+<% }) %> <% } else { %> <%- include('InvalidPage') %> <% } %>
