@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheet/main.css" />
+    <script src="/scripts/dialogControl.js" defer></script>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <section class="file-details-section">
+        <% if (file) { %>
+        <div class="file-container">
+          <div class="file-title">
+            <h3><%= file.name %></h3>
+          </div>
+          <div class="file-details">
+            <p>Size: <%= Math.round(file.size * 0.001) %> KB</p>
+            <p>File Created: <%= file.createdAt %></p>
+          </div>
+          <div class="file-buttons">
+            <button type="button" class="delete-btn">
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+            <button type="button">
+              <span class="material-symbols-outlined">download</span>
+            </button>
+          </div>
+          <% if (file.type === "image") { %>
+          <div class="file-image">
+            <img src="<%=file.url %>" alt="" />
+          </div>
+          <% } %>
+        </div>
+        <% } else { %>
+        <div class="error-container">
+          <p>File not found</p>
+        </div>
+        <% } %>
+      </section>
+      <%-include('./partials/folder_delete') %>
+    </main>
+  </body>
+</html>
