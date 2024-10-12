@@ -1,0 +1,17 @@
+<% if (files) { %>
+<section class="files-section">
+  <% files.map(file => { %>
+  <div class="file" id="<%= file.id %>">
+    <div class="icon">
+      <span class="material-symbols-outlined"> draft </span>
+    </div>
+    <div class="file-name-container">
+      <span class="file-name">
+        <a href="<%= file.id%>"><%= file.name %></a></span
+      >
+    </div>
+  </div>
+  <% }) %>
+</section>
+
+<% } else { %> <%- include('InvalidPage') %> <% } %>

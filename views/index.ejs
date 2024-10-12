@@ -28,7 +28,8 @@
 
       <%- include('./partials/folder', {currentFolder: currentFolder}) %> <%-
       include('./partials/modal', {currentFolder: currentFolder, }) %> <%-
-      include('./partials/folder_delete') %> <%-
+      include('./partials/file', {files: files}) %>
+      <%-include('./partials/folder_delete') %> <%-
       include('./partials/upload_modal', {currentFolder: currentFolder}) %>
     </main>
   </body>
