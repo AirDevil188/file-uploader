@@ -1,17 +1,12 @@
-<% if (files) { %>
-<section class="files-section">
-  <% files.map(file => { %>
-  <div class="file" id="<%= file.id %>">
-    <div class="icon">
-      <span class="material-symbols-outlined"> draft </span>
-    </div>
-    <div class="file-name-container">
-      <span class="file-name">
-        <a href="<%= file.id%>"><%= file.name %></a></span
-      >
-    </div>
+<% if (files) { %> <% files.map(file => { %>
+<div class="data" id="<%= file.id %>">
+  <div class="icon">
+    <span class="material-symbols-outlined"> draft </span>
   </div>
-  <% }) %>
-</section>
-
-<% } else { %> <%- include('InvalidPage') %> <% } %>
+  <div class="file-name-container">
+    <span class="file-name">
+      <a href="/drive/file/<%= file.id%>"><%= file.name %></a></span
+    >
+  </div>
+</div>
+<% }) %> <% } else { %> <%- include('InvalidPage') %> <% } %>
