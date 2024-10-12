@@ -13,4 +13,6 @@ fileRouter.post(
   fileController.postFileUpload
 );
 
+fileRouter.get("/drive/file/:id", fileController.getFileDetails);
+
 module.exports = fileRouter;
