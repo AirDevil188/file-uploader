@@ -44,6 +44,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/", driveRouter);
+app.use("/", fileRouter);
 app.use("/", userRouter);
 app.use("/", folderRouter);
 
