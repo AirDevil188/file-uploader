@@ -33,6 +33,7 @@ model file {
   userId    String
   folder    folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
   size      Int
+  url       String
   user      users    @relation(fields: [userId], references: [id])
 }
 
