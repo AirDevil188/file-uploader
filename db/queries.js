@@ -156,6 +156,20 @@ async function getFiles(folderId, userId) {
   });
 }
 
+async function getFile(fileId, userId) {
+  try {
+    return await prisma.file.findFirst({
+      where: {
+        id: fileId,
+        userId: userId,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
 module.exports = {
   deserializeUser,
   findUser,
@@ -170,4 +184,5 @@ module.exports = {
   updateFolder,
   getFolders,
   getFiles,
+  getFile,
 };
