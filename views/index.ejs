@@ -25,10 +25,11 @@
 
         <% } %>
       </section>
-
-      <%- include('./partials/folder', {currentFolder: currentFolder}) %> <%-
-      include('./partials/modal', {currentFolder: currentFolder, }) %> <%-
-      include('./partials/file', {files: files}) %>
+      <section class="data-section">
+        <%- include('./partials/folder', {currentFolder: currentFolder}) %> <%-
+        include('./partials/file', {files: files}) %>
+      </section>
+      <%- include('./partials/modal', {currentFolder: currentFolder, }) %>
       <%-include('./partials/folder_delete') %> <%-
       include('./partials/upload_modal', {currentFolder: currentFolder}) %>
     </main>
