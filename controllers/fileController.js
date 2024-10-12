@@ -12,6 +12,15 @@ const validateFile = [
   body("file_upload").isEmpty().withMessage("Select at least one file"),
 ];
 
+const getFileDetails = asyncHandler(async (req, res, next) => {
+  const file = await db.getFile(req.params.id, res.locals.currentUser.id);
+
+  return res.render("file-details", {
+    title: "File Details",
+    file: file,
+  });
+});
+
 const postFileUpload = [
   validateFile,
   asyncHandler(async (req, res, next) => {
@@ -43,6 +52,7 @@ const postFileUpload = [
         file.originalname,
         file.size,
         files.url,
+        files.resource_type,
         currentFolder.id,
         res.locals.currentUser.id
       );
@@ -51,5 +61,6 @@ const postFileUpload = [
 ];
 
 module.exports = {
+  getFileDetails,
   postFileUpload,
 };
