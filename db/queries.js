@@ -148,12 +148,17 @@ async function createFiles(name, size, url, folderId, userId) {
 }
 
 async function getFiles(folderId, userId) {
-  return await prisma.file.findMany({
-    where: {
-      userId: userId,
-      folderId: folderId,
-    },
-  });
+  try {
+    return await prisma.file.findMany({
+      where: {
+        userId: userId,
+        folderId: folderId,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 }
 
 async function getFile(fileId, userId) {
