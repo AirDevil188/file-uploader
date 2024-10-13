@@ -9,7 +9,7 @@
     <main>
       <section class="file-details-section">
         <% if (file) { %>
-        <div class="file-container">
+        <div class="file-container file">
           <div class="file-title">
             <h3><%= file.name %></h3>
           </div>
@@ -18,7 +18,7 @@
             <p>File Created: <%= file.createdAt %></p>
           </div>
           <div class="file-buttons">
-            <button type="button" class="delete-btn">
+            <button type="button" class="delete-btn file" id="<%= file.id %>">
               <span class="material-symbols-outlined">delete</span>
             </button>
             <form action="/drive/file/download/<%=file.id%>" method="post">
