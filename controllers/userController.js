@@ -61,6 +61,5 @@ const postSignUp = [
 module.exports = {
   getSignUp,
   getLogIn,
-  postLogIn,
   postSignUp,
 };
