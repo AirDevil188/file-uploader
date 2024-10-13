@@ -69,7 +69,16 @@ const deleteFolderDialog = () => {
       deleteDialog.showModal();
       cancelBtn.setAttribute("type", "button");
       dialogForm.setAttribute("method", "post");
-      dialogForm.setAttribute("action", `delete/${e.currentTarget.id}`);
+      if (e.currentTarget.classList.contains("folder")) {
+        dialogForm.setAttribute("action", `delete/${e.currentTarget.id}`);
+      }
+      if (e.currentTarget.classList.contains("file")) {
+        dialogForm.setAttribute(
+          "action",
+          `/drive/file/delete/${e.currentTarget.id}`
+        );
+      }
+
       closeDialogOutsideListener("dialog-delete");
     });
     if (cancelBtn) {
