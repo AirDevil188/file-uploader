@@ -10,7 +10,7 @@ userRouter.post(
   "/log-in",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/",
+    failureRedirect: "/log-in",
     failureMessage: true,
   })
 );
