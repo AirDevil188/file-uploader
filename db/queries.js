@@ -149,6 +149,20 @@ async function createFiles(name, size, url, type, folderId, userId, publicId) {
   }
 }
 
+async function deleteFile(id, userId) {
+  try {
+    return await prisma.file.delete({
+      where: {
+        id: id,
+        userId: userId,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
 async function getFiles(folderId, userId) {
   try {
     return await prisma.file.findMany({
@@ -189,6 +203,7 @@ module.exports = {
   getFolder,
   deleteFolder,
   updateFolder,
+  deleteFile,
   getFolders,
   getFiles,
   getFile,
