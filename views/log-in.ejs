@@ -25,6 +25,9 @@
           </form>
         </section>
       </main>
+      <% if (flashes.length > 0) { %> <% flashes.forEach(error => { %>
+      <span><%= error %></span>
+      <% }) %> <% } %>
       <footer></footer>
     </body>
   </head>
