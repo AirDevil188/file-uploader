@@ -19,9 +19,20 @@ export const hideToolbar = () => {
 };
 
 export const toolbarControl = (e) => {
-  const form = document.querySelector(".toolbar-form");
   const deleteBtn = document.querySelector(".delete-btn");
   const updateBtn = document.querySelector(".edit-btn");
+  if (e.currentTarget.classList.contains("file")) {
+    deleteBtn.classList.remove("folder");
+    deleteBtn.classList.add("file");
+    updateBtn.classList.remove("folder");
+    updateBtn.classList.add("file");
+  }
+  if (e.currentTarget.classList.contains("folder")) {
+    deleteBtn.classList.remove("file");
+    deleteBtn.classList.add("folder");
+    updateBtn.classList.remove("file");
+    updateBtn.classList.add("folder");
+  }
   deleteBtn.setAttribute("id", e.currentTarget.id);
   updateBtn.setAttribute("id", e.currentTarget.id);
 };
