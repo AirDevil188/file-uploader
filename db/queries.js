@@ -128,7 +128,7 @@ async function getFolder(id, userId) {
   }
 }
 
-async function createFiles(name, size, url, type, folderId, userId) {
+async function createFiles(name, size, url, type, folderId, userId, publicId) {
   try {
     return await prisma.file.createMany({
       data: [
@@ -139,6 +139,7 @@ async function createFiles(name, size, url, type, folderId, userId) {
           type: type,
           folderId: folderId,
           userId: userId,
+          publicId: publicId,
         },
       ],
     });
