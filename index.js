@@ -5,6 +5,7 @@ const session = require("express-session");
 const passport = require("passport");
 const { PrismaClient } = require("@prisma/client");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
+const flash = require("express-flash");
 
 const driveRouter = require("./routes/driveRouter");
 const userRouter = require("./routes/userRouter");
@@ -36,10 +37,15 @@ app.use(
   })
 );
 
+// express-flash middleware
+app.use(flash());
+// requiring passport config
 require("./middlewares/passport");
+
 app.use(passport.session());
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.flashes = req.flash("error");
   next();
 });
 
