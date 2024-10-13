@@ -36,6 +36,7 @@ model file {
   url       String
   user      users    @relation(fields: [userId], references: [id])
   type      String
+  publicId  String
 }
 
 model folder {
