@@ -15,4 +15,6 @@ fileRouter.post(
 
 fileRouter.get("/drive/file/:id", fileController.getFileDetails);
 
+fileRouter.post("/drive/file/download/:id", fileController.postDownloadFile);
+
 module.exports = fileRouter;

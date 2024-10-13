@@ -54,13 +54,24 @@ const postFileUpload = [
         files.url,
         files.resource_type,
         currentFolder.id,
-        res.locals.currentUser.id
+        res.locals.currentUser.id,
+        files.public_id
       );
+      console.log(files);
     });
   }),
 ];
 
+const postDownloadFile = asyncHandler(async (req, res, next) => {
+  const file = await db.getFile(req.params.id, res.locals.currentUser.id);
+
+  const url = await cloudinary.url(file.publicId, { flags: "attachment" });
+
+  res.redirect(url);
+});
+
 module.exports = {
   getFileDetails,
   postFileUpload,
+  postDownloadFile,
 };

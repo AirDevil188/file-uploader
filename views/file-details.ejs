@@ -21,9 +21,11 @@
             <button type="button" class="delete-btn">
               <span class="material-symbols-outlined">delete</span>
             </button>
-            <button type="button">
-              <span class="material-symbols-outlined">download</span>
-            </button>
+            <form action="/drive/file/download/<%=file.id%>" method="post">
+              <button type="submit">
+                <span class="material-symbols-outlined">download</span>
+              </button>
+            </form>
           </div>
           <% if (file.type === "image") { %>
           <div class="file-image">
