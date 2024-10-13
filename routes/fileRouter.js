@@ -6,6 +6,7 @@ const upload = multer({ storage: storage });
 const fileRouter = Router({ mergeParams: true });
 
 const fileController = require("../controllers/fileController");
+const isAuth = require("../middlewares/isAuth");
 
 fileRouter.post(
   "/drive/file-upload/:id",
@@ -16,5 +17,11 @@ fileRouter.post(
 fileRouter.get("/drive/file/:id", fileController.getFileDetails);
 
 fileRouter.post("/drive/file/download/:id", fileController.postDownloadFile);
+
+fileRouter.post(
+  "/drive/file/delete/:id",
+  isAuth.isAuth,
+  fileController.postDeleteFile
+);
 
 module.exports = fileRouter;

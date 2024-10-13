@@ -70,8 +70,16 @@ const postDownloadFile = asyncHandler(async (req, res, next) => {
   res.redirect(url);
 });
 
+const postDeleteFile = asyncHandler(async (req, res, next) => {
+  const file = await db.getFile(req.params.id, res.locals.currentUser.id);
+
+  await db.deleteFile(file.id, res.locals.currentUser.id);
+  res.redirect(`/drive/${file.folderId}`);
+});
+
 module.exports = {
   getFileDetails,
   postFileUpload,
   postDownloadFile,
+  postDeleteFile,
 };
