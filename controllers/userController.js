@@ -25,19 +25,6 @@ const getLogIn = asyncHandler(async (req, res, next) => {
   });
 });
 
-const postLogIn = [
-  asyncHandler(async (req, res, next) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(400).render("log-in", {
-        title: "CloudUp - Log In",
-        errors: errors.array(),
-      });
-    }
-  }),
-];
-
 const getSignUp = asyncHandler(async (req, res, next) => {
   if (res.locals.currentUser) {
     res.redirect("/");
