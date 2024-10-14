@@ -19,8 +19,10 @@ export const hideToolbar = () => {
 };
 
 export const toolbarControl = (e) => {
+  const formDownloadFile = document.querySelector(".form-download-file");
   const deleteBtn = document.querySelector(".delete-btn");
   const updateBtn = document.querySelector(".edit-btn");
+  const downloadBtn = document.querySelector(".download-btn");
   if (e.currentTarget.classList.contains("file")) {
     deleteBtn.classList.remove("folder");
     deleteBtn.classList.add("file");
@@ -35,6 +37,11 @@ export const toolbarControl = (e) => {
   }
   deleteBtn.setAttribute("id", e.currentTarget.id);
   updateBtn.setAttribute("id", e.currentTarget.id);
+  downloadBtn.setAttribute("id", e.currentTarget.id);
+  formDownloadFile.setAttribute(
+    "action",
+    `/drive/file/download/${e.currentTarget.id}`
+  );
 };
 
 const closeToolbar = () => {
