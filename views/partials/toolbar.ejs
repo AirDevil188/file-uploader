@@ -4,10 +4,15 @@
       <button class="close-btn" type="button">
         <span class="material-symbols-outlined">close</span>
       </button>
-      <button class="download-btn" type="button">
-        <span class="material-symbols-outlined">download</span>
-      </button>
-
+      <form
+        action="drive/file/download/:id"
+        method="post"
+        class="form-download-file"
+      >
+        <button class="download-btn" type="submit">
+          <span class="material-symbols-outlined">download</span>
+        </button>
+      </form>
       <button class="edit-btn" type="button">
         <span class="material-symbols-outlined">edit</span>
       </button>
