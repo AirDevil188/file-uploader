@@ -14,9 +14,13 @@ fileRouter.post(
   fileController.postFileUpload
 );
 
-fileRouter.get("/drive/file/:id", fileController.getFileDetails);
+fileRouter.get("/drive/file/:id", isAuth.isAuth, fileController.getFileDetails);
 
-fileRouter.post("/drive/file/download/:id", fileController.postDownloadFile);
+fileRouter.post(
+  "/drive/file/download/:id",
+  isAuth.isAuth,
+  fileController.postDownloadFile
+);
 
 fileRouter.post(
   "/drive/file/delete/:id",
