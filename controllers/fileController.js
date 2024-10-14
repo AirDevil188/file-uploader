@@ -46,9 +46,12 @@ const postFileUpload = [
         currentUrl: currentUrl,
       });
     }
+    console.log(req.files);
     await Promise.all(
       req.files.map(async (file) => {
-        const files = await cloudinary.uploader.upload(file.path);
+        const files = await cloudinary.uploader.upload(file.path, {
+          resource_type: "auto",
+        });
         db.createFiles(
           file.originalname,
           file.size,
@@ -67,7 +70,11 @@ const postFileUpload = [
 const postDownloadFile = asyncHandler(async (req, res, next) => {
   const file = await db.getFile(req.params.id, res.locals.currentUser.id);
 
-  const url = await cloudinary.url(file.publicId, { flags: "attachment" });
+  const url = await cloudinary.url(file.publicId, {
+    flags: "attachment",
+    resource_type: file.type,
+  });
+  console.log(url);
 
   res.redirect(url);
 });
