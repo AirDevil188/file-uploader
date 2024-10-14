@@ -58,8 +58,18 @@ const postSignUp = [
   }),
 ];
 
+const getLogOut = asyncHandler(async (req, res, next) => {
+  req.logOut((err) => {
+    if (err) {
+      next(err);
+    }
+    return res.redirect("/");
+  });
+});
+
 module.exports = {
   getSignUp,
   getLogIn,
   postSignUp,
+  getLogOut,
 };
