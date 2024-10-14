@@ -46,19 +46,21 @@ const postFileUpload = [
         currentUrl: currentUrl,
       });
     }
-    req.files.forEach(async (file) => {
-      const files = await cloudinary.uploader.upload(file.path);
-      await db.createFiles(
-        file.originalname,
-        file.size,
-        files.url,
-        files.resource_type,
-        currentFolder.id,
-        res.locals.currentUser.id,
-        files.public_id
-      );
-      console.log(files);
-    });
+    await Promise.all(
+      req.files.map(async (file) => {
+        const files = await cloudinary.uploader.upload(file.path);
+        db.createFiles(
+          file.originalname,
+          file.size,
+          files.url,
+          files.resource_type,
+          currentFolder.id,
+          res.locals.currentUser.id,
+          files.public_id
+        );
+      })
+    );
+    res.redirect(`/drive/${currentFolder.id}`);
   }),
 ];
 
