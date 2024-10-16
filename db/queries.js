@@ -191,6 +191,72 @@ async function getFile(fileId, userId) {
   }
 }
 
+async function shareFolder(folderId, expires) {
+  try {
+    return await prisma.shareFolder.create({
+      data: {
+        shareFolderId: folderId,
+        expires: expires,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
+async function getInterval(num) {
+  try {
+    const interval = num + " days";
+
+    const expiresAt =
+      await prisma.$queryRaw`SELECT now(), now() + ${interval}::TEXT::INTERVAL AS expiresAt`;
+
+    return expiresAt[0];
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
+async function getSharedFolder(folderId) {
+  try {
+    return prisma.shareFolder.findFirst({
+      where: {
+        id: folderId,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
+async function isChildOf(parentId, childId) {
+  let currentFolder = await prisma.folder.findUnique({
+    where: { id: childId },
+    select: { id: true, parentId: true },
+  });
+
+  // if subfolder is child of currentFolder proceed
+
+  while (currentFolder) {
+    if (currentFolder.id === parentId) {
+      return true;
+    }
+    if (!currentFolder.parentId) {
+      break;
+    }
+
+    currentFolder = await prisma.folder.findUnique({
+      where: { id: currentFolder.parentId },
+      select: { id: true, parentId: true },
+    });
+  }
+
+  return false;
+}
+
 module.exports = {
   deserializeUser,
   findUser,
@@ -198,6 +264,7 @@ module.exports = {
   createFolder,
   createDriveFolder,
   createFiles,
+  shareFolder,
   deleteFolder,
   getDriveFolder,
   getFolder,
@@ -207,4 +274,7 @@ module.exports = {
   getFolders,
   getFiles,
   getFile,
+  getInterval,
+  getSharedFolder,
+  isChildOf,
 };
