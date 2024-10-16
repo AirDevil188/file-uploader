@@ -49,8 +49,37 @@ const postUpdateFolder = asyncHandler(async (req, res, next) => {
   } else res.redirect(`/drive/${folder.parentId}`);
 });
 
+const getShareFolder = asyncHandler(async (req, res, next) => {
+  const currentFolder = await db.getFolder(req.params.id);
+  const isChild = await db.isChildOf(
+    res.locals.sharedFolderId,
+    currentFolder.id
+  );
+  const subFolders = await db.getFolders(req.params.id);
+  const files = await db.getFiles(req.params.id);
+
+  if (isChild) {
+    res.render("folder-share", {
+      title: "Shared",
+      currentFolder: currentFolder,
+      folders: subFolders,
+      files: files,
+    });
+  } else res.redirect("/");
+});
+
+const postShareFolder = asyncHandler(async (req, res, next) => {
+  const folder = await db.getFolder(req.params.id, res.locals.currentUser.id);
+  const { share } = req.body;
+
+  const interval = await db.getInterval(share);
+  await db.shareFolder(folder.id, interval.expiresat);
+});
+
 module.exports = {
   postFolder,
   postDeleteFolder,
   postUpdateFolder,
+  getShareFolder,
+  postShareFolder,
 };
