@@ -4,6 +4,7 @@ const folderController = require("../controllers/folderController");
 const fileController = require("../controllers/fileController");
 
 const isAuth = require("../middlewares/isAuth");
+const isValid = require("../middlewares/validateSharedFolder");
 
 const folderRouter = Router({ mergeParams: true });
 
@@ -19,6 +20,18 @@ folderRouter.post(
   "/drive/delete/:id",
   isAuth.isAuth,
   folderController.postDeleteFolder
+);
+
+folderRouter.get(
+  "/drive/share/:expires/:id",
+  isValid.isValid,
+  folderController.getShareFolder
+);
+
+folderRouter.post(
+  "/drive/share/:expires/:id",
+  isAuth.isAuth,
+  folderController.postShareFolder
 );
 
 module.exports = folderRouter;
