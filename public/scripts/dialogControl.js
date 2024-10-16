@@ -1,5 +1,6 @@
 const deleteDialog = document.querySelector(".dialog-delete");
 const addFileDialog = document.querySelector(".dialog-add-file");
+const shareDialog = document.querySelector(".dialog-share");
 const dialog = document.querySelectorAll("dialog");
 const dialogSection = document.querySelectorAll(".dialog-section");
 
@@ -56,6 +57,12 @@ const closeDialogOutsideListener = (dialog) => {
         });
 
       break;
+    case "dialog-share":
+      document.querySelector(".dialog-share").addEventListener("click", (e) => {
+        if (e.target.tagName === "DIALOG") {
+          e.target.close();
+        }
+      });
   }
 };
 
@@ -99,7 +106,20 @@ const uploadFolderDialog = () => {
   } else return;
 };
 
+const shadeFolderDialog = () => {
+  const shareFolderBtn = document.querySelector(".share-btn");
+  const shareForm = document.querySelector(".folder-share-form");
+  if (shareFolderBtn) {
+    shareFolderBtn.addEventListener("click", (e) => {
+      shareDialog.showModal();
+      shareForm.setAttribute("action", `share/${e.currentTarget.id}`);
+      closeDialogOutsideListener("dialog-share");
+    });
+  } else return;
+};
+
 newFolderDialog();
 editFolderDialog();
 uploadFolderDialog();
 deleteFolderDialog();
+shadeFolderDialog();

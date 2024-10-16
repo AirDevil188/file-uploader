@@ -18,6 +18,9 @@ document.addEventListener("click", (e) => {
   const outsideAddFileDialogClick = !document
     .querySelector(".dialog-add-file")
     .contains(e.target);
+  const outsideShareFolderDialogClick = !document
+    .querySelector(".dialog-share")
+    .contains(e.target);
   const arrElements = [
     clickedFolder,
     outsideClickFolderSection,
@@ -25,6 +28,7 @@ document.addEventListener("click", (e) => {
     outsideEditDialogClick,
     outsideDeleteDialogClick,
     outsideAddFileDialogClick,
+    outsideShareFolderDialogClick,
   ];
 
   if (arrElements.every(Boolean)) {

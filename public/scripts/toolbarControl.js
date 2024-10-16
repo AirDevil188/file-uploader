@@ -23,13 +23,16 @@ export const toolbarControl = (e) => {
   const deleteBtn = document.querySelector(".delete-btn");
   const updateBtn = document.querySelector(".edit-btn");
   const downloadBtn = document.querySelector(".download-btn");
+  const shareBtn = document.querySelector(".share-btn");
   if (e.currentTarget.classList.contains("file")) {
+    shareBtn.setAttribute("hidden", "");
     deleteBtn.classList.remove("folder");
     deleteBtn.classList.add("file");
     updateBtn.classList.remove("folder");
     updateBtn.classList.add("file");
   }
   if (e.currentTarget.classList.contains("folder")) {
+    shareBtn.removeAttribute("hidden");
     deleteBtn.classList.remove("file");
     deleteBtn.classList.add("folder");
     updateBtn.classList.remove("file");
@@ -38,6 +41,7 @@ export const toolbarControl = (e) => {
   deleteBtn.setAttribute("id", e.currentTarget.id);
   updateBtn.setAttribute("id", e.currentTarget.id);
   downloadBtn.setAttribute("id", e.currentTarget.id);
+  shareBtn.setAttribute("id", e.currentTarget.id);
   formDownloadFile.setAttribute(
     "action",
     `/drive/file/download/${e.currentTarget.id}`
