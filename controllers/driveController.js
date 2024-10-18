@@ -26,7 +26,11 @@ const getDrive = asyncHandler(async (req, res, next) => {
   const files = await db.getFiles(req.params.id, res.locals.currentUser.id);
 
   if (!currentFolder) {
-    return res.status(404).render("404");
+    const err = [{ msg: new Error("Folder not found") }];
+    return res.status(404).render("index", {
+      title: "Error - Folder Not Found",
+      errors: err,
+    });
   }
 
   return res.render("index", {
