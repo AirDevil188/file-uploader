@@ -15,6 +15,14 @@ const validateFile = [
 const getFileDetails = asyncHandler(async (req, res, next) => {
   const file = await db.getFile(req.params.id, res.locals.currentUser.id);
 
+  if (!file) {
+    const errors = [{ msg: new Error("Folder not found") }];
+    return res.status(404).render("file_details", {
+      title: "File Details",
+      errors: errors,
+    });
+  }
+
   return res.render("file_details", {
     title: "File Details",
     file: file,
