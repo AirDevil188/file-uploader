@@ -61,7 +61,7 @@ const getShareFolder = asyncHandler(async (req, res, next) => {
 
   if (isChild) {
     res.render("folder_share", {
-      title: `Shared - ${currentFolder.name} folder`,
+      title: `Shared - ${currentFolder.name}`,
       currentFolder: currentFolder,
       folders: subFolders,
       files: files,
