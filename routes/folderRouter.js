@@ -29,7 +29,7 @@ folderRouter.get(
 );
 
 folderRouter.post(
-  "/drive/share/:expires/:id",
+  "/drive/share/:id",
   isAuth.isAuth,
   folderController.postShareFolder
 );
