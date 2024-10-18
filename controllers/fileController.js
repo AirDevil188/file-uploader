@@ -104,8 +104,8 @@ const getFileSharedDetails = asyncHandler(async (req, res, next) => {
   }
   const file = await db.getFile(req.params.id);
 
-  res.render("file-details", {
-    title: "File Share",
+  res.render("file_details", {
+    title: `Shared - ${file.name}`,
     file: file,
     expires: req.params.expires,
   });
