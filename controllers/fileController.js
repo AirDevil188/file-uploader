@@ -15,7 +15,7 @@ const validateFile = [
 const getFileDetails = asyncHandler(async (req, res, next) => {
   const file = await db.getFile(req.params.id, res.locals.currentUser.id);
 
-  return res.render("file-details", {
+  return res.render("file_details", {
     title: "File Details",
     file: file,
     expires: req.params.expires,
