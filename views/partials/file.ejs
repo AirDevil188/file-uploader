@@ -5,8 +5,16 @@
   </div>
   <div class="file-name-container">
     <span class="file-name">
-      <a href="/drive/file/<%= file.id%>"><%= file.name %></a></span
-    >
+      <% if (expires) { %>
+      <span
+        ><a href="/drive/share/file/<%= expires%>/<%=file.id%>"
+          ><%= file.name %></a
+        ></span
+      >
+      <% } else { %>
+      <span><a href="/drive/file/<%=file.id%>"><%= file.name %></a></span>
+      <% }%>
+    </span>
   </div>
 </div>
 <% }) %> <% } else { %> <%- include('InvalidPage') %> <% } %>

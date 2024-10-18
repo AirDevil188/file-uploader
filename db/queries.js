@@ -257,6 +257,31 @@ async function isChildOf(parentId, childId) {
   return false;
 }
 
+async function isFileOf(folder, fileId) {
+  try {
+    const sharedFolder = await prisma.shareFolder.findFirst({
+      where: {
+        id: folder,
+      },
+    });
+
+    const isFileOf = await prisma.file.findFirst({
+      where: {
+        id: fileId,
+        folderId: sharedFolder.shareFolderId,
+      },
+      select: {
+        id: true,
+        folderId: true,
+      },
+    });
+    if (isFileOf) return true;
+    else return false;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 module.exports = {
   deserializeUser,
   findUser,
@@ -277,4 +302,5 @@ module.exports = {
   getInterval,
   getSharedFolder,
   isChildOf,
+  isFileOf,
 };

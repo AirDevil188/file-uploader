@@ -7,6 +7,7 @@ const fileRouter = Router({ mergeParams: true });
 
 const fileController = require("../controllers/fileController");
 const isAuth = require("../middlewares/isAuth");
+const isValid = require("../middlewares/validateSharedFolder");
 
 fileRouter.post(
   "/drive/file-upload/:id",
@@ -26,6 +27,17 @@ fileRouter.post(
   "/drive/file/delete/:id",
   isAuth.isAuth,
   fileController.postDeleteFile
+);
+
+fileRouter.get(
+  "/drive/share/file/:expires/:id",
+  isValid.isValid,
+  fileController.getFileSharedDetails
+);
+
+fileRouter.post(
+  "/drive/share/file/download/:id",
+  fileController.postDownloadFile
 );
 
 module.exports = fileRouter;

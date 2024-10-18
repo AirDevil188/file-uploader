@@ -7,6 +7,8 @@
   <body>
     <header></header>
     <main>
+      <% if (locals.errors) { %> <%- include('./partials/errors', {errors:
+      errors}) %> <% } else { %>
       <section class="file-details-section">
         <% if (file) { %>
         <div class="file-container file">
@@ -18,6 +20,16 @@
             <p>File Created: <%= file.createdAt %></p>
           </div>
           <div class="file-buttons">
+            <% if (expires) { %>
+            <form
+              action="/drive/share/file/download/<%=file.id%>"
+              method="post"
+            >
+              <button type="submit">
+                <span class="material-symbols-outlined">download</span>
+              </button>
+            </form>
+            <% } else { %>
             <button type="button" class="delete-btn file" id="<%= file.id %>">
               <span class="material-symbols-outlined">delete</span>
             </button>
@@ -26,6 +38,7 @@
                 <span class="material-symbols-outlined">download</span>
               </button>
             </form>
+            <% } %>
           </div>
           <% if (file.type === "image") { %>
           <div class="file-image">
@@ -39,7 +52,7 @@
         </div>
         <% } %>
       </section>
-      <%-include('./partials/folder_delete') %>
+      <%-include('./partials/folder_delete') %> <% }%>
     </main>
   </body>
 </html>

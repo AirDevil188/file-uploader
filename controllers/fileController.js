@@ -13,11 +13,13 @@ const validateFile = [
 ];
 
 const getFileDetails = asyncHandler(async (req, res, next) => {
+  const share = req.url.includes("share");
   const file = await db.getFile(req.params.id, res.locals.currentUser.id);
 
   return res.render("file-details", {
     title: "File Details",
     file: file,
+    expires: req.params.expires,
   });
 });
 
@@ -46,7 +48,6 @@ const postFileUpload = [
         currentUrl: currentUrl,
       });
     }
-    console.log(req.files);
     await Promise.all(
       req.files.map(async (file) => {
         const files = await cloudinary.uploader.upload(file.path, {
@@ -68,13 +69,12 @@ const postFileUpload = [
 ];
 
 const postDownloadFile = asyncHandler(async (req, res, next) => {
-  const file = await db.getFile(req.params.id, res.locals.currentUser.id);
+  const file = await db.getFile(req.params.id);
 
   const url = await cloudinary.url(file.publicId, {
     flags: "attachment",
     resource_type: file.type,
   });
-  console.log(url);
 
   res.redirect(url);
 });
@@ -86,8 +86,28 @@ const postDeleteFile = asyncHandler(async (req, res, next) => {
   res.redirect(`/drive/${file.folderId}`);
 });
 
+const getFileSharedDetails = asyncHandler(async (req, res, next) => {
+  const isFileOf = await db.isFileOf(req.params.expires, req.params.id);
+  if (!isFileOf) {
+    const errors = [{ msg: new Error("Shared file not found") }];
+    return res.status(404).render("file-details", {
+      title: "Error",
+      errors: errors,
+    });
+  }
+  const share = req.url.includes("share");
+  const file = await db.getFile(req.params.id);
+
+  res.render("file-details", {
+    title: "File Share",
+    file: file,
+    expires: req.params.expires,
+  });
+});
+
 module.exports = {
   getFileDetails,
+  getFileSharedDetails,
   postFileUpload,
   postDownloadFile,
   postDeleteFile,
