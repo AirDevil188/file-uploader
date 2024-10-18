@@ -9,7 +9,8 @@
       <% if (locals.errors) { %> <%- include('./partials/errors', {errors:
       errors}) %> <% } else { %>
       <section class="shared-folder-section">
-        <%- include('./partials/folder', {currentFolder: currentFolder}) %>
+        <%- include('./partials/folder', {currentFolder: currentFolder}) %> <%-
+        include('./partials/file', { files: files }) %>
       </section>
       <% } %>
     </main>
