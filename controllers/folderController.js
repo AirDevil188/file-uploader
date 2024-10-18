@@ -59,8 +59,8 @@ const getShareFolder = asyncHandler(async (req, res, next) => {
   const files = await db.getFiles(req.params.id);
 
   if (isChild) {
-    res.render("folder-share", {
-      title: "Shared",
+    res.render("folder_share", {
+      title: `Shared - ${currentFolder.name} folder`,
       currentFolder: currentFolder,
       folders: subFolders,
       files: files,

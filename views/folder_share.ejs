@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Shared Folder</title>
+    <link rel="stylesheet" href="/stylesheet/main.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <% if (locals.errors) { %> <%- include('./partials/errors', {errors:
+      errors}) %> <% } else { %>
+      <section class="shared-folder-section">
+        <%- include('./partials/folder', {currentFolder: currentFolder}) %>
+      </section>
+      <% } %>
+    </main>
+  </body>
+</html>
