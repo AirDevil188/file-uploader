@@ -13,7 +13,6 @@ const validateFile = [
 ];
 
 const getFileDetails = asyncHandler(async (req, res, next) => {
-  const share = req.url.includes("share");
   const file = await db.getFile(req.params.id, res.locals.currentUser.id);
 
   return res.render("file-details", {
