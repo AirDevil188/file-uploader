@@ -34,7 +34,7 @@ const getDrive = asyncHandler(async (req, res, next) => {
   }
 
   return res.render("index", {
-    title: `${req.params.name} Folder`,
+    title: `Folder - ${currentFolder.name}`,
     folders: subFolders,
     files: files,
     currentFolder: currentFolder,
