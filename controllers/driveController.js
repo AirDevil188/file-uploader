@@ -35,6 +35,7 @@ const getDrive = asyncHandler(async (req, res, next) => {
     files: files,
     currentFolder: currentFolder,
     currentUrl: currentUrl,
+    expires: null,
   });
 });
 

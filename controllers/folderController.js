@@ -50,6 +50,7 @@ const postUpdateFolder = asyncHandler(async (req, res, next) => {
 });
 
 const getShareFolder = asyncHandler(async (req, res, next) => {
+  const params = req.params.expires;
   const currentFolder = await db.getFolder(req.params.id);
   const isChild = await db.isChildOf(
     res.locals.sharedFolderId,
@@ -64,6 +65,7 @@ const getShareFolder = asyncHandler(async (req, res, next) => {
       currentFolder: currentFolder,
       folders: subFolders,
       files: files,
+      expires: params,
     });
   } else res.redirect("/");
 });
