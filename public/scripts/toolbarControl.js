@@ -50,16 +50,18 @@ export const toolbarControl = (e) => {
 
 const closeToolbar = () => {
   const closeBtn = document.querySelector(".close-btn");
-  const allData = document.querySelectorAll(".data");
-  const toolbar = document.querySelector(".toolbar-section");
-  closeBtn.addEventListener("click", () => {
-    const clickedIcons = Array.from(allData).find((data) =>
-      data.classList.contains("clicked")
-    );
-    if (clickedIcons) {
-      toolbar.setAttribute("hidden", "");
-    }
-  });
+  if (closeBtn) {
+    const allData = document.querySelectorAll(".data");
+    const toolbar = document.querySelector(".toolbar-section");
+    closeBtn.addEventListener("click", () => {
+      const clickedIcons = Array.from(allData).find((data) =>
+        data.classList.contains("clicked")
+      );
+      if (clickedIcons) {
+        toolbar.setAttribute("hidden", "");
+      }
+    });
+  } else return;
 };
 
 closeToolbar();
