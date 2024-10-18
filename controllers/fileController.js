@@ -102,7 +102,6 @@ const getFileSharedDetails = asyncHandler(async (req, res, next) => {
       errors: errors,
     });
   }
-  const share = req.url.includes("share");
   const file = await db.getFile(req.params.id);
 
   res.render("file-details", {
