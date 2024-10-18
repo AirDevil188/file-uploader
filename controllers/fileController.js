@@ -18,13 +18,13 @@ const getFileDetails = asyncHandler(async (req, res, next) => {
   if (!file) {
     const errors = [{ msg: new Error("Folder not found") }];
     return res.status(404).render("file_details", {
-      title: "File Details",
+      title: "Error File Not Found",
       errors: errors,
     });
   }
 
   return res.render("file_details", {
-    title: "File Details",
+    title: `File - ${file.name}`,
     file: file,
     expires: req.params.expires,
   });
@@ -98,7 +98,7 @@ const getFileSharedDetails = asyncHandler(async (req, res, next) => {
   if (!isFileOf) {
     const errors = [{ msg: new Error("Shared file not found") }];
     return res.status(404).render("file-details", {
-      title: "Error",
+      title: "Error - File Not Found",
       errors: errors,
     });
   }
