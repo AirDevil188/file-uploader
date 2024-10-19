@@ -7,15 +7,11 @@
     <script src="/scripts/toolbarControl.js" type="module" defer></script>
   </head>
   <body>
-    <header></header>
+    <% if (locals.errors) { %> <%- include('./partials/errors', {errors:
+    errors}) %> <% } else { %>
+    <header><h1>CludUp - Drive</h1></header>
+    <%- include('./partials/navbar') %>
     <main>
-      <% if (locals.errors) { %> <%- include('./partials/errors', {errors:
-      errors}) %> <% } else { %>
-
-      <span class="material-symbols-outlined add-file-btn"> add </span>
-      <span class="material-symbols-outlined open-button">
-        create_new_folder
-      </span>
       <%-include('./partials/toolbar') %>
       <section class="menu-buttons">
         <% if (currentFolder.parentId) { %>
