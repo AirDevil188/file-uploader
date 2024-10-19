@@ -25,6 +25,11 @@
         <% } %>
       </section>
       <section class="data-section">
+        <div class="category-container">
+          <span>Name: </span>
+          <span>Size: </span>
+          <span>Created: </span>
+        </div>
         <%- include('./partials/folder', {currentFolder: currentFolder}) %> <%-
         include('./partials/file', {files: files}) %>
       </section>
