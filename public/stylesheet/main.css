@@ -117,6 +117,7 @@ li > .material-symbols-outlined {
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr 1fr 1fr;
+  cursor: pointer;
 }
 
 .grid-row:hover {
