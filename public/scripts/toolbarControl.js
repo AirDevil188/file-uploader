@@ -26,12 +26,15 @@ export const toolbarControl = (e) => {
   const shareBtn = document.querySelector(".share-btn");
   if (e.currentTarget.classList.contains("file")) {
     shareBtn.setAttribute("hidden", "");
+    updateBtn.setAttribute("hidden", "");
+    downloadBtn.removeAttribute("hidden");
     deleteBtn.classList.remove("folder");
     deleteBtn.classList.add("file");
     updateBtn.classList.remove("folder");
     updateBtn.classList.add("file");
   }
   if (e.currentTarget.classList.contains("folder")) {
+    downloadBtn.setAttribute("hidden", "");
     shareBtn.removeAttribute("hidden");
     deleteBtn.classList.remove("file");
     deleteBtn.classList.add("folder");
