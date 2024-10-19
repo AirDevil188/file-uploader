@@ -1,9 +1,15 @@
 <% if (currentFolder) { %> <% folders.map(folder => { %>
 <div class="data folder" id="<%= folder.id %>">
-  <div class="icon">
-    <span class="material-symbols-outlined"> folder </span>
-    <span class="folder-name">
-      <a href="<%= folder.id%>"><%= folder.name %></a></span
+  <div class="icon-container grid-row">
+    <div class="icon-title-container">
+      <span class="material-symbols-outlined"> folder </span>
+      <span class="folder-name">
+        <a href="<%= folder.id%>"><%= folder.name %></a></span
+      >
+    </div>
+    <span class="folder-size">-</span>
+    <span class="folder-created-at"
+      ><%= folder.createdAt.toDateString() %></span
     >
   </div>
 </div>
