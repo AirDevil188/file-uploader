@@ -85,6 +85,7 @@ li > .material-symbols-outlined {
   display: flex;
   flex-flow: column;
   gap: 1rem;
+  padding: 0.5rem;
 }
 .category-container {
   color: var(--text-color);
@@ -97,13 +98,14 @@ li > .material-symbols-outlined {
   color: #fff;
   background-color: var(--bg-icon-color);
   padding: 1rem;
+  border: 1px solid #fff;
 }
 
 .icon-title-container {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  gap: 1rem;
+  gap: 25px;
 }
 
 .grid-row {
@@ -113,6 +115,8 @@ li > .material-symbols-outlined {
 }
 
 .folder-size,
-.folder-created-at {
+.folder-created-at,
+.file-size,
+.file-created-at {
   text-align: center;
 }

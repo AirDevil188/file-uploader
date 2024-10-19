@@ -1,10 +1,8 @@
 <% if (files) { %> <% files.map(file => { %>
 <div class="data file" id="<%= file.id %>">
-  <div class="icon">
-    <span class="material-symbols-outlined"> draft </span>
-  </div>
-  <div class="file-name-container">
-    <span class="file-name">
+  <div class="icon-container grid-row">
+    <div class="icon-title-container">
+      <span class="material-symbols-outlined"> draft </span>
       <% if (expires) { %>
       <span
         ><a href="/drive/share/file/<%= expires%>/<%=file.id%>"
@@ -14,7 +12,9 @@
       <% } else { %>
       <span><a href="/drive/file/<%=file.id%>"><%= file.name %></a></span>
       <% }%>
-    </span>
+    </div>
+    <span class="file-size"><%= Math.round(file.size * 0.001) %> KB</span>
+    <span class="file-created-at"><%= file.createdAt.toDateString() %></span>
   </div>
 </div>
 <% }) %> <% } else { %> <%- include('InvalidPage') %> <% } %>
