@@ -32,11 +32,13 @@ body {
   display: grid;
   background-color: var(--bg-color);
   grid-template-rows: 0.5fr 2fr 1fr;
+  color: var(--text-color);
 }
 
 header {
   color: var(--text-color);
 }
+
 li {
   list-style: none;
 }
