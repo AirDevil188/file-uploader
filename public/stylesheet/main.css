@@ -39,6 +39,10 @@ header {
   color: var(--text-color);
 }
 
+main {
+  padding: 1rem;
+}
+
 li {
   list-style: none;
 }
@@ -80,6 +84,11 @@ li > .material-symbols-outlined {
   font-size: 2rem;
   color: #ffff;
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.download-btn,
+.delete-btn {
+  background-color: var(--bg-icon-color);
 }
 
 /* TOOLBAR */
@@ -150,4 +159,20 @@ li > .material-symbols-outlined {
 .file-size,
 .file-created-at {
   text-align: center;
+}
+
+/* file details */
+
+.file-container {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 20px;
+  background-color: var(--bg-icon-color);
+  padding: 1rem;
+}
+.file-buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 10px;
+  cursor: pointer;
 }

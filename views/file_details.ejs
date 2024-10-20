@@ -5,7 +5,8 @@
     <script src="/scripts/dialogControl.js" defer></script>
   </head>
   <body>
-    <header></header>
+    <header><h1>CludUp - Drive</h1></header>
+    <%- include('./partials/navbar') %>
     <main>
       <% if (locals.errors) { %> <%- include('./partials/errors', {errors:
       errors}) %> <% } else { %>
@@ -25,7 +26,7 @@
               action="/drive/share/file/download/<%=file.id%>"
               method="post"
             >
-              <button type="submit">
+              <button type="submit" class="download-btn">
                 <span class="material-symbols-outlined">download</span>
               </button>
             </form>
@@ -34,7 +35,7 @@
               <span class="material-symbols-outlined">delete</span>
             </button>
             <form action="/drive/file/download/<%=file.id%>" method="post">
-              <button type="submit">
+              <button type="submit" class="download-btn">
                 <span class="material-symbols-outlined">download</span>
               </button>
             </form>
