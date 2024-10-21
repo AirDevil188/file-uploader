@@ -77,15 +77,15 @@ nav > .nav-menu {
 .nav-menu > li {
   flex: 1;
   text-align: center;
-  color: #ffff;
 }
 
 .nav-button {
   background-color: #1e1f24;
   border: none;
+  color: #fff;
 }
 li > .material-symbols-outlined,
-li > a > .material-symbols-outlined {
+.nav-button > .material-symbols-outlined {
   font-size: 2rem;
   color: #ffff;
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
@@ -117,6 +117,10 @@ li > a > .material-symbols-outlined {
 }
 .toolbar-icon-container > form {
   display: inline;
+}
+
+.toolbar-icon-container > form > button {
+  border: none;
 }
 
 /* data section icon/file */
