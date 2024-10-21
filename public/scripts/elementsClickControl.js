@@ -45,6 +45,9 @@ const folderEventListener = () => {
       filterClickedFolder();
       e.currentTarget.classList.add("clicked");
       toolbarControl(e);
+      if (e.target.tagName === "A") {
+        return;
+      }
       showToolbar();
     });
   });
