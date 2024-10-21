@@ -57,6 +57,10 @@ dialog {
   border: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* NAVBAR */
 nav {
   width: 100%;
@@ -123,6 +127,16 @@ li > .material-symbols-outlined,
   border: none;
 }
 
+/* back button */
+.menu-buttons > button {
+  border: 1px solid var(--text-color);
+  background-color: #121212;
+}
+
+.menu-buttons > button > .material-symbols-outlined {
+  font-size: 2rem;
+}
+
 /* data section icon/file */
 
 .data-section {
@@ -183,7 +197,6 @@ li > .material-symbols-outlined,
   display: flex;
   flex-flow: row nowrap;
   gap: 10px;
-  cursor: pointer;
 }
 
 /* DIALOG */
@@ -216,5 +229,4 @@ form > .form-group {
   padding: 0.5rem;
   border: 1px solid var(--text-color);
   border-radius: 10px;
-  cursor: pointer;
 }
