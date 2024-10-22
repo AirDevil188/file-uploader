@@ -1,32 +1,37 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheet/main.css" />
   </head>
   <body>
-    <header></header>
+    <header>
+      <h3>CloudUp</h3>
+    </header>
     <main>
       <section class="sign-up-section">
-        <form action="/sign-up" method="POST">
-          <div class="form-group">
-            <label for="username">Username: </label>
-            <input type="text" name="username" id="username" />
-          </div>
-          <div class="form-group">
-            <label for="password">Password: </label>
-            <input type="password" name="password" id="password" />
-          </div>
-          <div class="form-group">
-            <label for="confirm_password">Confirm Password: </label>
-            <input
-              type="password"
-              name="confirm_password"
-              id="confirm_password"
-            />
-          </div>
-          <div class="button-container">
-            <button type="submit">Submit</button>
-          </div>
-        </form>
+        <dialog class="dialog" open="">
+          <form action="/sign-up" method="POST">
+            <div class="form-group">
+              <label for="username">Username: </label>
+              <input type="text" name="username" id="username" />
+            </div>
+            <div class="form-group">
+              <label for="password">Password: </label>
+              <input type="password" name="password" id="password" />
+            </div>
+            <div class="form-group">
+              <label for="confirm_password">Confirm Password: </label>
+              <input
+                type="password"
+                name="confirm_password"
+                id="confirm_password"
+              />
+            </div>
+            <div class="button-container">
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+        </dialog>
       </section>
       <%- include('./partials/errors') %>
     </main>

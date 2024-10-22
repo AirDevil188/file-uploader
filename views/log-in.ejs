@@ -1,28 +1,33 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheet/main.css" />
     <body>
-      <header></header>
+      <header>
+        <h3>CloudUp</h3>
+      </header>
       <main>
         <section class="log-in-section">
-          <form action="/log-in" method="POST">
-            <div class="form-group">
-              <label for="usernamne">Username: </label>
-              <input type="text" id="username" name="username" />
-            </div>
-            <div class="form-group">
-              <label for="password">Password: </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                autocomplete="off"
-              />
-            </div>
-            <div class="button-container">
-              <button type="submit">Log In</button>
-            </div>
-          </form>
+          <dialog class="dialog" open="">
+            <form action="/log-in" method="POST">
+              <div class="form-group">
+                <label for="username">Username: </label>
+                <input type="text" id="username" name="username" />
+              </div>
+              <div class="form-group">
+                <label for="password">Password: </label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="button-container">
+                <button type="submit">Log In</button>
+              </div>
+            </form>
+          </dialog>
         </section>
       </main>
       <% if (flashes.length > 0) { %> <% flashes.forEach(error => { %>

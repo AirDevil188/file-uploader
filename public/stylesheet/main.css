@@ -224,6 +224,10 @@ form > .form-group {
   gap: 10px;
 }
 
+.button-container {
+  padding-top: 1rem;
+}
+
 .button-container > button {
   text-transform: uppercase;
   padding: 0.5rem;
