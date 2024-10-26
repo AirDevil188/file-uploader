@@ -9,8 +9,15 @@
   <body>
     <% if (locals.errors) { %> <%- include('./partials/errors', {errors:
     errors}) %> <% } else { %>
-    <header><h1>CludUp - Drive</h1></header>
+    <header>
+      <div class="logo-section">
+        <a href="/">
+          <img src="/img/logo.png" alt="CloudUp Logo" class="logo" />
+        </a>
+      </div>
+    </header>
     <%- include('./partials/navbar') %>
+
     <main>
       <%-include('./partials/toolbar') %>
       <section class="menu-buttons">
