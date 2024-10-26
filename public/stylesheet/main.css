@@ -36,7 +36,17 @@ body {
 }
 
 header {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
   color: var(--text-color);
+  background-color: var(--bg-icon-color);
+  padding: 1rem;
+}
+
+.logo {
+  width: 70px;
+  height: auto;
 }
 
 main {
@@ -233,4 +243,43 @@ form > .form-group {
   padding: 0.5rem;
   border: 1px solid var(--text-color);
   border-radius: 10px;
+}
+
+/* larger screens */
+
+@media (min-width: 800px) {
+  /* GENERAL ELEMENTS */
+
+  body {
+    grid-template-columns: 0.1fr 2fr;
+  }
+
+  header {
+    max-width: 100px;
+    padding: 0.5rem;
+    display: grid;
+    grid-row: 1/4;
+    grid-column: 1/1;
+    background-color: var(--bg-icon-color);
+    justify-content: center;
+  }
+
+  main {
+    grid-row: 2/4;
+    grid-column: 2/2;
+  }
+
+  /* NAVBAR */
+
+  nav {
+    max-width: 100px;
+    grid-row: 2/4;
+    grid-column: 1/1;
+    width: auto;
+    position: static;
+  }
+
+  nav > .nav-menu {
+    flex-flow: column wrap;
+  }
 }
